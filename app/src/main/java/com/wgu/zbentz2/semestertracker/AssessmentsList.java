@@ -1,7 +1,9 @@
 package com.wgu.zbentz2.semestertracker;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,15 @@ public class AssessmentsList extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         getActivity().setTitle("Assessments");
+
+        FloatingActionButton fab = getView().findViewById(R.id.assessments_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), AssessmentDetail.class));
+            }
+        });
 
     }
 
