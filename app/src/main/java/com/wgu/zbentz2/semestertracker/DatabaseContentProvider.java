@@ -9,67 +9,39 @@ import android.net.Uri;
 
 public class DatabaseContentProvider extends ContentProvider {
 
-    private static final String AUTHORITY;
+    private static final String AUTHORITY = "com.wgu.zbentz2.semestertracker.databasecontentprovider";
 
-    public static final String ASSESSMENT_CONTENT_ITEM;
-    public static final String ASSESSMENT_PATH;
+    public static final String ASSESSMENT_CONTENT_ITEM = "foo";
+    public static final String ASSESSMENT_PATH = DatabaseOpenHelper.ASSESSMENT_TABLE_NAME;
 
-    public static final String COURSE_CONTENT_ITEM;
-    public static final String COURSE_PATH;
+    public static final String COURSE_CONTENT_ITEM = "bar";
+    public static final String COURSE_PATH = DatabaseOpenHelper.COURSE_TABLE_NAME;
 
-    public static final String NOTE_CONTENT_ITEM;
-    public static final String NOTE_PATH;
+    public static final String NOTE_CONTENT_ITEM = "biz";
+    public static final String NOTE_PATH = DatabaseOpenHelper.NOTE_TABLE_NAME;
 
-    public static final String TERM_CONTENT_ITEM;
-    private static final String TERM_PATH;
+    public static final String TERM_CONTENT_ITEM = "baz";
+    private static final String TERM_PATH = DatabaseOpenHelper.TERM_TABLE_NAME;
 
-    public static final int TERMS;
-    public static final int TERMS_ID;
-    public static final int COURSES;
-    public static final int COURSES_ID;
-    public static final int NOTES;
-    public static final int NOTES_ID;
-    public static final int ASSESSMENTS;
-    public static final int ASSESSMENTS_ID;
+    public static final int TERMS = 1;
+    public static final int TERMS_ID = 2;
+    public static final int COURSES = 3;
+    public static final int COURSES_ID = 4;
+    public static final int NOTES = 5;
+    public static final int NOTES_ID = 6;
+    public static final int ASSESSMENTS = 7;
+    public static final int ASSESSMENTS_ID = 8;
 
-    private static final UriMatcher uriMatcher;
+    private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
-    public static final Uri TERMS_CONTENT_URI;
-    public static final Uri COURSES_CONTENT_URI;
-    public static final Uri NOTES_CONTENT_URI;
-    public static final Uri ASSESSMENTS_CONTENT_URI;
+    public static final Uri TERMS_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + TERM_PATH);
+    public static final Uri COURSES_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + COURSE_PATH);
+    public static final Uri NOTES_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + NOTE_PATH);
+    public static final Uri ASSESSMENTS_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + ASSESSMENT_PATH);
+
+    private SQLiteDatabase DATABASE;
 
     static {
-
-        AUTHORITY = "com.wgu.zbentz2.semestertracker.databasecontentprovider";
-
-        ASSESSMENT_CONTENT_ITEM = "foo";
-        ASSESSMENT_PATH = DatabaseOpenHelper.ASSESSMENT_TABLE_NAME;
-
-        COURSE_CONTENT_ITEM = "bar";
-        COURSE_PATH = DatabaseOpenHelper.COURSE_TABLE_NAME;
-
-        NOTE_CONTENT_ITEM = "biz";
-        NOTE_PATH = DatabaseOpenHelper.NOTE_TABLE_NAME;
-
-        TERM_CONTENT_ITEM = "baz";
-        TERM_PATH = DatabaseOpenHelper.TERM_TABLE_NAME;
-
-        TERMS = 1;
-        TERMS_ID = 2;
-        COURSES = 3;
-        COURSES_ID = 4;
-        NOTES = 5;
-        NOTES_ID = 6;
-        ASSESSMENTS = 7;
-        ASSESSMENTS_ID = 8;
-
-        TERMS_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + TERM_PATH);
-        COURSES_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + COURSE_PATH);
-        NOTES_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + NOTE_PATH);
-        ASSESSMENTS_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + ASSESSMENT_PATH);
-
-        uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
         uriMatcher.addURI(AUTHORITY, TERM_PATH, TERMS);
         uriMatcher.addURI(AUTHORITY, TERM_PATH + "/#", TERMS_ID);
@@ -85,14 +57,72 @@ public class DatabaseContentProvider extends ContentProvider {
     @Override public boolean onCreate() {
 
         DatabaseOpenHelper dbHelper = new DatabaseOpenHelper(getContext());
-        SQLiteDatabase DATABASE = dbHelper.getWritableDatabase();
+        DATABASE = dbHelper.getWritableDatabase();
 
         return true;
     }
 
-    @Override public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    @Override public Cursor query(Uri uri,
+                                  String[] projection,
+                                  String selection,
+                                  String[] selectionArgs,
+                                  String sortOrder) {
 
-        return null;
+        switch(uriMatcher.match(uri)) {
+
+            case TERMS:
+
+                return DATABASE.query(
+                    DatabaseOpenHelper.TERM_TABLE_NAME,
+                    DatabaseOpenHelper.TERM_COLUMNS,
+                    selection,
+                    null,
+                    null,
+                    null,
+                    DatabaseOpenHelper.TERM_ID + " ASC"
+                );
+
+            case COURSES:
+
+                return DATABASE.query(
+                    DatabaseOpenHelper.COURSE_TABLE_NAME,
+                    DatabaseOpenHelper.COURSE_COLUMNS,
+                    selection,
+                    null,
+                    null,
+                    null,
+                    DatabaseOpenHelper.COURSE_ID + " ASC"
+                );
+
+            case NOTES:
+
+                return DATABASE.query(
+                    DatabaseOpenHelper.NOTE_TABLE_NAME,
+                    DatabaseOpenHelper.NOTE_COLUMNS,
+                    selection,
+                    null,
+                    null,
+                    null,
+                    DatabaseOpenHelper.NOTE_ID + " ASC"
+                );
+
+            case ASSESSMENTS:
+
+                return DATABASE.query(
+                    DatabaseOpenHelper.ASSESSMENT_TABLE_NAME,
+                    DatabaseOpenHelper.ASSESSMENT_COLUMNS,
+                    selection,
+                    null,
+                    null,
+                    null,
+                    DatabaseOpenHelper.ASSESSMENT_ID + " ASC"
+                );
+
+            default:
+
+                return null;
+
+        }
 
     }
 
@@ -104,19 +134,152 @@ public class DatabaseContentProvider extends ContentProvider {
 
     @Override public Uri insert(Uri uri, ContentValues values) {
 
-        return null;
+        long object_id;
+
+        switch(uriMatcher.match(uri)) {
+
+            case TERMS:
+
+                object_id = DATABASE.insert(
+                    DatabaseOpenHelper.TERM_TABLE_NAME,
+                    null,
+                    values
+                );
+
+                return Uri.parse(TERM_PATH + "/" + object_id);
+
+            case COURSES:
+
+                object_id = DATABASE.insert(
+                    DatabaseOpenHelper.COURSE_TABLE_NAME,
+                    null,
+                    values
+                );
+
+                return Uri.parse(COURSE_PATH + "/" + object_id);
+
+            case NOTES:
+
+                object_id = DATABASE.insert(
+                    DatabaseOpenHelper.NOTE_TABLE_NAME,
+                    null,
+                    values
+                );
+
+                return Uri.parse(NOTE_PATH + "/" + object_id);
+
+            case ASSESSMENTS:
+
+                object_id = DATABASE.insert(
+                    DatabaseOpenHelper.ASSESSMENT_TABLE_NAME,
+                    null,
+                    values
+                );
+
+                return Uri.parse(ASSESSMENT_PATH + "/" + object_id);
+
+            default:
+
+                return null;
+
+        }
 
     }
 
     @Override public int delete(Uri uri, String selection, String[] selectionArgs) {
 
-        return 0;
+        switch (uriMatcher.match(uri)) {
+
+            case TERMS:
+
+                DATABASE.delete(
+                    DatabaseOpenHelper.TERM_TABLE_NAME,
+                    selection,
+                    selectionArgs
+                );
+
+
+            case COURSES:
+
+                return DATABASE.delete(
+                    DatabaseOpenHelper.COURSE_TABLE_NAME,
+                    selection,
+                    selectionArgs
+                );
+
+            case NOTES:
+
+                return DATABASE.delete(
+                    DatabaseOpenHelper.NOTE_TABLE_NAME,
+                    selection,
+                    selectionArgs
+                );
+
+            case ASSESSMENTS:
+
+                return DATABASE.delete(
+                    DatabaseOpenHelper.ASSESSMENT_TABLE_NAME,
+                    selection,
+                    selectionArgs
+                );
+
+            default:
+
+                return 0;
+
+        }
 
     }
 
-    @Override public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+    @Override public int update(Uri uri,
+                                ContentValues values,
+                                String selection,
+                                String[] selectionArgs) {
 
-        return 0;
+        switch (uriMatcher.match(uri)) {
+
+            case TERMS:
+
+                DATABASE.update(
+                    DatabaseOpenHelper.TERM_TABLE_NAME,
+                    values,
+                    selection,
+                    selectionArgs
+                );
+
+
+            case COURSES:
+
+                return DATABASE.update(
+                    DatabaseOpenHelper.COURSE_TABLE_NAME,
+                    values,
+                    selection,
+                    selectionArgs
+                );
+
+            case NOTES:
+
+                return DATABASE.update(
+                    DatabaseOpenHelper.NOTE_TABLE_NAME,
+                    values,
+                    selection,
+                    selectionArgs
+                );
+
+            case ASSESSMENTS:
+
+                return DATABASE.update(
+                    DatabaseOpenHelper.ASSESSMENT_TABLE_NAME,
+                    values,
+                    selection,
+                    selectionArgs
+                );
+
+            default:
+
+                return 0;
+
+        }
 
     }
 

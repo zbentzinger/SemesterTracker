@@ -28,7 +28,7 @@ public class TermsList extends Fragment {
 
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Terms");
+        getActivity().setTitle("Term");
 
         FloatingActionButton fab = getView().findViewById(R.id.terms_fab);
         fab.setOnClickListener(new View.OnClickListener() {

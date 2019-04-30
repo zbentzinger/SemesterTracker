@@ -81,7 +81,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         TERM_ACTIVE = "term_active";
         TERM_CREATED_AT = "term_created_at";
 
-        TERM_COLUMNS = new String[]{
+        TERM_COLUMNS = new String[] {
             TERM_ID,
             TERM_NAME,
             TERM_START_DATE,
@@ -122,7 +122,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         COURSE_NOTIFICATION = "course_notification";
         COURSE_CREATED_AT = "course_created_at";
 
-        COURSE_COLUMNS = new String[]{
+        COURSE_COLUMNS = new String[] {
             COURSE_ID,
             COURSE_TERM_ID,
             COURSE_NAME,
@@ -176,7 +176,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         NOTE_BODY = "note_body";
         NOTE_CREATED_AT = "note_created_at";
 
-        NOTE_COLUMNS = new String[]{
+        NOTE_COLUMNS = new String[] {
             NOTE_ID,
             NOTE_COURSE_ID,
             NOTE_BODY,
@@ -211,7 +211,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         ASSESSMENT_NOTIFICATION = "assessment_notification";
         ASSESSMENT_CREATED_AT = "assessment_created_at";
 
-        ASSESSMENT_COLUMNS = new String[]{
+        ASSESSMENT_COLUMNS = new String[] {
             ASSESSMENT_ID,
             ASSESSMENT_COURSE_ID,
             ASSESSMENT_NAME,
