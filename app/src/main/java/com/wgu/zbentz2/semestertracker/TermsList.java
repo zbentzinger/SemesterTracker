@@ -3,8 +3,8 @@ package com.wgu.zbentz2.semestertracker;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +28,7 @@ public class TermsList extends Fragment {
 
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Term");
+        getActivity().setTitle("Terms");
 
         FloatingActionButton fab = getView().findViewById(R.id.terms_fab);
         fab.setOnClickListener(new View.OnClickListener() {
