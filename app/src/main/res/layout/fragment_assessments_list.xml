@@ -6,7 +6,7 @@
     android:id="@+id/assessments_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AssessmentsList">
+    tools:context=".ui.AssessmentsList">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/assessments_fab"

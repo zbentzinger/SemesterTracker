@@ -1,8 +1,11 @@
-package com.wgu.zbentz2.semestertracker;
+package com.wgu.zbentz2.semestertracker.ui;
 
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.wgu.zbentz2.semestertracker.R;
 
 public class AssessmentDetail extends AppCompatActivity {
 

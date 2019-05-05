@@ -8,4 +8,5 @@
     <string name="title_activity_term_detail">TermDetail</string>
     <string name="title_activity_course_detail">CourseDetail</string>
     <string name="title_activity_assessment_detail">AssessmentDetail</string>
+    <string name="term_active_checkbox">Active</string>
 </resources>

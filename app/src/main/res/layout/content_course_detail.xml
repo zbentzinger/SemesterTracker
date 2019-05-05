@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".CourseDetail"
+    tools:context=".ui.CourseDetail"
     tools:showIn="@layout/activity_course_detail">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

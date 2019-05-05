@@ -1,26 +1,29 @@
-package com.wgu.zbentz2.semestertracker;
+package com.wgu.zbentz2.semestertracker.ui;
 
 
 import android.content.Intent;
 import android.os.Bundle;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
 
-public class CoursesList extends Fragment {
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.wgu.zbentz2.semestertracker.R;
 
 
-    public CoursesList() {}
+public class AssessmentsList extends Fragment {
+
+
+    public AssessmentsList() {}
 
 
     @Override public View onCreateView(LayoutInflater inflater,
                                        ViewGroup container,
                                        Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_courses_list, container, false);
+        return inflater.inflate(R.layout.fragment_assessments_list, container, false);
 
     }
 
@@ -28,14 +31,14 @@ public class CoursesList extends Fragment {
 
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Courses");
+        getActivity().setTitle("Assessments");
 
-        FloatingActionButton fab = getView().findViewById(R.id.courses_fab);
+        FloatingActionButton fab = getView().findViewById(R.id.assessments_fab);
         fab.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), CourseDetail.class));
+                startActivity(new Intent(getActivity(), AssessmentDetail.class));
             }
         });
 

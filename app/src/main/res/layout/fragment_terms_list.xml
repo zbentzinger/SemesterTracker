@@ -6,7 +6,14 @@
     android:id="@+id/terms_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TermsList">
+    tools:context=".ui.TermsList">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/terms_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray"
+        tools:listitem="@layout/recycler_view_term" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/terms_fab"
