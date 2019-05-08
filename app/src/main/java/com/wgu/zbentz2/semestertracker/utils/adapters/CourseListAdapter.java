@@ -1,7 +1,6 @@
 package com.wgu.zbentz2.semestertracker.utils.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,12 +59,6 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Co
 
     }
 
-    private Course getCourse(int adapterPosition) {
-
-        return courses.get(adapterPosition);
-
-    }
-
     @NonNull
     @Override public CourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
@@ -104,6 +97,12 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Co
             return 0;
 
         }
+    }
+
+    private Course getCourse(int adapterPosition) {
+
+        return courses.get(adapterPosition);
+
     }
 
     public void setCourses(List<Course> courses) {

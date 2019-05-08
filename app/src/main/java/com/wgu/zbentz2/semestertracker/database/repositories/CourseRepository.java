@@ -59,7 +59,7 @@ public class CourseRepository {
 
         private CourseDAO asyncCourseDao;
 
-        public updateAsyncTask(CourseDAO courseDao) {
+        updateAsyncTask(CourseDAO courseDao) {
 
             asyncCourseDao = courseDao;
 
@@ -78,7 +78,7 @@ public class CourseRepository {
 
         private CourseDAO asyncCourseDao;
 
-        public deleteAsyncTask(CourseDAO courseDao) {
+        deleteAsyncTask(CourseDAO courseDao) {
 
             asyncCourseDao = courseDao;
 

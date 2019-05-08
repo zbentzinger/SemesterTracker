@@ -83,13 +83,6 @@ public class TermListAdapter extends RecyclerView.Adapter<TermListAdapter.TermVi
 
     }
 
-    public void setTerms(List<Term> terms) {
-
-        this.terms = terms;
-        notifyDataSetChanged();
-
-    }
-
     @Override public int getItemCount() {
 
         if (terms != null) {
@@ -107,6 +100,13 @@ public class TermListAdapter extends RecyclerView.Adapter<TermListAdapter.TermVi
     private Term getTerm(int pos) {
 
         return terms.get(pos);
+
+    }
+
+    public void setTerms(List<Term> terms) {
+
+        this.terms = terms;
+        notifyDataSetChanged();
 
     }
 

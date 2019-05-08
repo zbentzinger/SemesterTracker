@@ -77,7 +77,9 @@ public class CoursesList extends Fragment {
         fab.setOnClickListener(
             new View.OnClickListener() {
                 @Override public void onClick(View view) {
-                    startActivity(new Intent(getActivity(), CourseDetail.class));
+                    startActivity(
+                        new Intent(getActivity(), CourseDetail.class)
+                    );
                 }
             }
         );

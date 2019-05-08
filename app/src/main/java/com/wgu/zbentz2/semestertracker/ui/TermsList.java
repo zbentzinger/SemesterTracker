@@ -77,7 +77,9 @@ public class TermsList extends Fragment {
         fab.setOnClickListener(
             new View.OnClickListener() {
                 @Override public void onClick(View view) {
-                    startActivity(new Intent(getActivity(), TermDetail.class));
+                    startActivity(
+                        new Intent(getActivity(), TermDetail.class)
+                    );
                 }
             }
         );

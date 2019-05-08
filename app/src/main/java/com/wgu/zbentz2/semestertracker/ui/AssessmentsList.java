@@ -38,7 +38,9 @@ public class AssessmentsList extends Fragment {
         fab.setOnClickListener(
             new View.OnClickListener() {
                 @Override public void onClick(View view) {
-                    startActivity(new Intent(getActivity(), AssessmentDetail.class));
+                    startActivity(
+                        new Intent(getActivity(), AssessmentDetail.class)
+                    );
                 }
             }
         );
