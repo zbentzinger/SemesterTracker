@@ -6,14 +6,14 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 
 import com.wgu.zbentz2.semestertracker.database.SemesterTrackerRoomDB;
-import com.wgu.zbentz2.semestertracker.database.dao.TermDao;
+import com.wgu.zbentz2.semestertracker.database.dao.TermDAO;
 import com.wgu.zbentz2.semestertracker.database.entities.Term;
 
 import java.util.List;
 
 public class TermRepository {
 
-    private TermDao termDao;
+    private TermDAO termDao;
     private LiveData<List<Term>> allTerms;
 
     public TermRepository(Application application) {
@@ -44,9 +44,9 @@ public class TermRepository {
 
     private static class updateAsyncTask extends AsyncTask<Term, Void, Void> {
 
-        private TermDao asyncTermDao;
+        private TermDAO asyncTermDao;
 
-        updateAsyncTask(TermDao dao) {
+        updateAsyncTask(TermDAO dao) {
 
             asyncTermDao = dao;
 

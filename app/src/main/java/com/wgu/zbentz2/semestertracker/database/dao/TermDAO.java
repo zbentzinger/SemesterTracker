@@ -11,7 +11,7 @@ import com.wgu.zbentz2.semestertracker.database.entities.Term;
 import java.util.List;
 
 @Dao
-public interface TermDao {
+public interface TermDAO {
 
     @Insert
     long insert(Term term);

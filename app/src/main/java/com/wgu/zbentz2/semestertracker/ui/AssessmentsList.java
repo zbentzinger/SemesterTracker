@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -19,7 +20,7 @@ public class AssessmentsList extends Fragment {
     public AssessmentsList() {}
 
 
-    @Override public View onCreateView(LayoutInflater inflater,
+    @Override public View onCreateView(@NonNull LayoutInflater inflater,
                                        ViewGroup container,
                                        Bundle savedInstanceState) {
 
@@ -27,20 +28,20 @@ public class AssessmentsList extends Fragment {
 
     }
 
-    @Override public void onViewCreated(View view, Bundle savedInstanceState) {
+    @Override public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
 
         getActivity().setTitle("Assessments");
 
         FloatingActionButton fab = getView().findViewById(R.id.assessments_fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), AssessmentDetail.class));
+        fab.setOnClickListener(
+            new View.OnClickListener() {
+                @Override public void onClick(View view) {
+                    startActivity(new Intent(getActivity(), AssessmentDetail.class));
+                }
             }
-        });
+        );
 
     }
 

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.wgu.zbentz2.semestertracker.R;
@@ -56,10 +57,11 @@ public class TermListAdapter extends RecyclerView.Adapter<TermListAdapter.TermVi
 
     }
 
-    @Override public TermViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @NonNull
+    @Override public TermViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View itemView = inflater.inflate(
-            R.layout.recycler_view_term,
+            R.layout.term_card,
             parent,
             false
         );
@@ -68,7 +70,7 @@ public class TermListAdapter extends RecyclerView.Adapter<TermListAdapter.TermVi
 
     }
 
-    @Override public void onBindViewHolder(TermViewHolder holder, int position) {
+    @Override public void onBindViewHolder(@NonNull TermViewHolder holder, int position) {
 
         if (terms != null) {
 

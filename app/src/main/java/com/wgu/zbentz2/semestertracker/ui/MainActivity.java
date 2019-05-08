@@ -3,6 +3,7 @@ package com.wgu.zbentz2.semestertracker.ui;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -17,8 +18,7 @@ import com.wgu.zbentz2.semestertracker.R;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
 
@@ -30,7 +30,11 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+            this,
+            drawer,
+            toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         );
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -41,8 +45,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    @Override
-    public void onBackPressed() {
+    @Override public void onBackPressed() {
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
@@ -92,7 +95,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    @Override public boolean onNavigationItemSelected(MenuItem item) {
+    @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         loadFragment(item.getItemId());
         return true;

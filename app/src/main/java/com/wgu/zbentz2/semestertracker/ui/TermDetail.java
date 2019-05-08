@@ -22,7 +22,6 @@ public class TermDetail extends AppCompatActivity {
 
     private Term term;
 
-
     @Override protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
