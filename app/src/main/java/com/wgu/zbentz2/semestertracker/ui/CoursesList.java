@@ -18,7 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.wgu.zbentz2.semestertracker.R;
 import com.wgu.zbentz2.semestertracker.database.entities.Course;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.CourseViewModel;
-import com.wgu.zbentz2.semestertracker.utils.adapters.CourseListAdapter;
+import com.wgu.zbentz2.semestertracker.utils.adapters.CourseRecyclerViewAdapter;
 import com.wgu.zbentz2.semestertracker.utils.listeners.CourseClickListener;
 
 import java.util.List;
@@ -44,7 +44,7 @@ public class CoursesList extends Fragment {
         RecyclerView recyclerView = courses_view.findViewById(R.id.courses_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        final CourseListAdapter adapter = new CourseListAdapter(
+        final CourseRecyclerViewAdapter adapter = new CourseRecyclerViewAdapter(
             getActivity(),
             addCourseClickListener()
         );

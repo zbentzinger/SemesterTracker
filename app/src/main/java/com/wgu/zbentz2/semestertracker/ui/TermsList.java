@@ -18,7 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.wgu.zbentz2.semestertracker.R;
 import com.wgu.zbentz2.semestertracker.database.entities.Term;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.TermViewModel;
-import com.wgu.zbentz2.semestertracker.utils.adapters.TermListAdapter;
+import com.wgu.zbentz2.semestertracker.utils.adapters.TermRecyclerViewAdapter;
 import com.wgu.zbentz2.semestertracker.utils.listeners.TermClickListener;
 
 import java.util.List;
@@ -43,7 +43,7 @@ public class TermsList extends Fragment {
         RecyclerView recyclerView = terms_view.findViewById(R.id.terms_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        final TermListAdapter adapter = new TermListAdapter(
+        final TermRecyclerViewAdapter adapter = new TermRecyclerViewAdapter(
             getActivity(),
             addTermClickListener()
         );

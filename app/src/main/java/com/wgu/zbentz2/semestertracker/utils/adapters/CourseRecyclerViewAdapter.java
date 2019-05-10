@@ -15,13 +15,13 @@ import com.wgu.zbentz2.semestertracker.utils.listeners.CourseClickListener;
 
 import java.util.List;
 
-public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.CourseViewHolder> {
+public class CourseRecyclerViewAdapter extends RecyclerView.Adapter<CourseRecyclerViewAdapter.CourseViewHolder> {
 
     private CourseClickListener adapterListener;
     private final LayoutInflater layoutInflater;
     private List<Course> courses;
 
-    public CourseListAdapter(Context context, CourseClickListener courseClickListener) {
+    public CourseRecyclerViewAdapter(Context context, CourseClickListener courseClickListener) {
 
         layoutInflater = LayoutInflater.from(context);
         this.adapterListener = courseClickListener;

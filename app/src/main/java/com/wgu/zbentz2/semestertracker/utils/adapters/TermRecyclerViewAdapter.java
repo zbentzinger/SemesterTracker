@@ -15,13 +15,13 @@ import com.wgu.zbentz2.semestertracker.utils.listeners.TermClickListener;
 
 import java.util.List;
 
-public class TermListAdapter extends RecyclerView.Adapter<TermListAdapter.TermViewHolder> {
+public class TermRecyclerViewAdapter extends RecyclerView.Adapter<TermRecyclerViewAdapter.TermViewHolder> {
 
     private TermClickListener adapterListener;
     private final LayoutInflater inflater;
     private List<Term> terms;
 
-    public TermListAdapter(Context context, TermClickListener listener) {
+    public TermRecyclerViewAdapter(Context context, TermClickListener listener) {
 
         inflater = LayoutInflater.from(context);
         this.adapterListener = listener;

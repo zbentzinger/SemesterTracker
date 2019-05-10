@@ -6,15 +6,18 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.wgu.zbentz2.semestertracker.database.dao.AssessmentDAO;
 import com.wgu.zbentz2.semestertracker.database.dao.CourseDAO;
 import com.wgu.zbentz2.semestertracker.database.dao.TermDAO;
+import com.wgu.zbentz2.semestertracker.database.entities.Assessment;
 import com.wgu.zbentz2.semestertracker.database.entities.Course;
 import com.wgu.zbentz2.semestertracker.database.entities.Term;
 
 @Database(
     entities = {
         Term.class,
-        Course.class
+        Course.class,
+        Assessment.class
     },
     version = 1
 )
@@ -22,6 +25,7 @@ public abstract class SemesterTrackerRoomDB extends RoomDatabase {
 
     public abstract TermDAO termDao();
     public abstract CourseDAO courseDao();
+    public abstract AssessmentDAO assessmentDao();
 
     private static volatile SemesterTrackerRoomDB INSTANCE;
 
