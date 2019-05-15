@@ -54,6 +54,24 @@ public class AssessmentRepository {
 
     }
 
+    private static class deleteAsyncTask extends AsyncTask<Assessment, Void, Void> {
+
+        private AssessmentDAO asyncAssessmentDao;
+
+        deleteAsyncTask(AssessmentDAO assessmentDao) {
+
+            asyncAssessmentDao = assessmentDao;
+
+        }
+
+        @Override protected Void doInBackground(Assessment... assessments) {
+
+            asyncAssessmentDao.delete(assessments[0]);
+            return null;
+
+        }
+
+    }
 
     private static class updateAsyncTask extends AsyncTask<Assessment, Void, Void> {
 
@@ -68,25 +86,6 @@ public class AssessmentRepository {
         @Override protected Void doInBackground(final Assessment... assessments) {
 
             asyncAssessmentDao.update(assessments[0]);
-            return null;
-
-        }
-
-    }
-
-    private static class deleteAsyncTask extends AsyncTask<Assessment, Void, Void> {
-
-        private AssessmentDAO asyncAssessmentDao;
-
-        deleteAsyncTask(AssessmentDAO assessmentDao) {
-
-            asyncAssessmentDao = assessmentDao;
-
-        }
-
-        @Override protected Void doInBackground(Assessment... assessments) {
-
-            asyncAssessmentDao.delete(assessments[0]);
             return null;
 
         }

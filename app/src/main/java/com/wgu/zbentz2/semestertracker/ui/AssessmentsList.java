@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.wgu.zbentz2.semestertracker.R;
 import com.wgu.zbentz2.semestertracker.database.entities.Assessment;
-import com.wgu.zbentz2.semestertracker.database.repositories.AssessmentRepository;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.AssessmentViewModel;
 import com.wgu.zbentz2.semestertracker.utils.adapters.AssessmentRecyclerViewAdapter;
 import com.wgu.zbentz2.semestertracker.utils.listeners.AssessmentClickListener;

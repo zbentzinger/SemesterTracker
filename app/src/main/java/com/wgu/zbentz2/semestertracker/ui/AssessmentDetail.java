@@ -8,10 +8,11 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.wgu.zbentz2.semestertracker.R;
 import com.wgu.zbentz2.semestertracker.database.entities.Assessment;
-import com.wgu.zbentz2.semestertracker.database.repositories.AssessmentRepository;
+import com.wgu.zbentz2.semestertracker.database.viewmodels.AssessmentViewModel;
 
 public class AssessmentDetail extends AppCompatActivity {
 
@@ -19,6 +20,8 @@ public class AssessmentDetail extends AppCompatActivity {
     private EditText assessmentType;
     private EditText assessmentDueDate;
     private CheckBox assessmentNotifications;
+
+    private AssessmentViewModel assessmentViewModel;
 
     private Assessment assessment;
     private String action;
@@ -36,6 +39,8 @@ public class AssessmentDetail extends AppCompatActivity {
         assessmentType = findViewById(R.id.edit_assessment_type);
         assessmentDueDate = findViewById(R.id.edit_assessment_due_date);
         assessmentNotifications = findViewById(R.id.edit_assessment_notifications);
+
+        assessmentViewModel = ViewModelProviders.of(this).get(AssessmentViewModel.class);
 
 
         // Get the intent from the previous view and set config based on it.
@@ -87,8 +92,6 @@ public class AssessmentDetail extends AppCompatActivity {
 
     private void finishEditing() {
 
-        AssessmentRepository assessmentRepository = new AssessmentRepository(getApplication());
-
         int assessment_notifcations = assessmentNotifications.isChecked() ? 1 : 0;
 
         String assessment_name = assessmentName.getText().toString();
@@ -112,7 +115,7 @@ public class AssessmentDetail extends AppCompatActivity {
                         assessment_notifcations
                     );
 
-                    long temp = assessmentRepository.insert(assessment);
+                    long temp = assessmentViewModel.insert(assessment);
                     break;
 
 
@@ -123,7 +126,7 @@ public class AssessmentDetail extends AppCompatActivity {
                     assessment.setDue_date(assessment_due_date);
                     assessment.setNotifications(assessment_notifcations);
 
-                    assessmentRepository.update(assessment);
+                    assessmentViewModel.update(assessment);
                     break;
 
 

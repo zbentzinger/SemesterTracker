@@ -5,6 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity(tableName = "terms")
 public class Term implements Serializable {
@@ -69,6 +70,28 @@ public class Term implements Serializable {
     public void setEnd_date(String end_date) {
 
         this.end_date = end_date;
+
+    }
+
+    @Override public String toString() {
+
+        return this.name;
+
+    }
+
+    @Override public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (!(o instanceof Term)) return false;
+        Term term = (Term) o;
+
+        return getId() == term.getId();
+
+    }
+
+    @Override public int hashCode() {
+
+        return Objects.hash(getId());
 
     }
 

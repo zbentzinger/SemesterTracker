@@ -7,16 +7,19 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.wgu.zbentz2.semestertracker.R;
 import com.wgu.zbentz2.semestertracker.database.entities.Term;
-import com.wgu.zbentz2.semestertracker.database.repositories.TermRepository;
+import com.wgu.zbentz2.semestertracker.database.viewmodels.TermViewModel;
 
 public class TermDetail extends AppCompatActivity {
 
     private EditText termName;
     private EditText termStartDate;
     private EditText termEndDate;
+
+    private TermViewModel termViewModel;
 
     private String action;
 
@@ -31,6 +34,8 @@ public class TermDetail extends AppCompatActivity {
         termName = findViewById(R.id.edit_term_name);
         termStartDate = findViewById(R.id.edit_term_start_date);
         termEndDate = findViewById(R.id.edit_term_end_date);
+
+        termViewModel = ViewModelProviders.of(this).get(TermViewModel.class);
 
         // Set up Action Bar.
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -83,8 +88,6 @@ public class TermDetail extends AppCompatActivity {
 
     private void finishEditing() {
 
-        TermRepository termRepository = new TermRepository(getApplication());
-
         String term_name = termName.getText().toString();
         String term_start_date  = termStartDate.getText().toString();
         String term_end_date = termEndDate.getText().toString();
@@ -97,7 +100,7 @@ public class TermDetail extends AppCompatActivity {
 
                     term = new Term(term_name, term_start_date, term_end_date);
 
-                    long temp = termRepository.insert(term);
+                    long temp = termViewModel.insert(term);
                     break;
 
 
@@ -107,7 +110,7 @@ public class TermDetail extends AppCompatActivity {
                     term.setStart_date(term_start_date);
                     term.setEnd_date(term_end_date);
 
-                    termRepository.update(term);
+                    termViewModel.update(term);
                     break;
 
 

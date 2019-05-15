@@ -30,15 +30,47 @@ public class TermRepository {
 
     }
 
+    public Term getTerm(long term_id) {
+
+        return termDao.getTerm(term_id);
+
+    }
+
     public long insert(Term term) {
 
         return termDao.insert(term);
 
     }
 
+    public void delete(Term term) {
+
+        new deleteAsyncTask(termDao).execute(term);
+
+    }
+
     public void update(Term term) {
 
         new updateAsyncTask(termDao).execute(term);
+
+    }
+
+    private static class deleteAsyncTask extends AsyncTask<Term, Void, Void> {
+
+        private TermDAO asyncTermDao;
+
+        deleteAsyncTask(TermDAO dao) {
+
+            asyncTermDao = dao;
+
+        }
+
+
+        @Override protected Void doInBackground(final Term... params) {
+
+            asyncTermDao.delete(params[0]);
+            return null;
+
+        }
 
     }
 

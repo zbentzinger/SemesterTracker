@@ -35,4 +35,22 @@ public class CourseViewModel extends AndroidViewModel {
 
     }
 
+    public long insert(Course course) {
+
+        return courseRepository.insert(course);
+
+    }
+
+    public void delete(Course course) {
+
+        courseRepository.delete(course);
+
+    }
+
+    public void update(Course course) {
+
+        courseRepository.update(course);
+
+    }
+
 }

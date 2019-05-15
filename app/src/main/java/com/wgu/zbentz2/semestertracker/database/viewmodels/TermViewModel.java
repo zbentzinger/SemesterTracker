@@ -29,4 +29,28 @@ public class TermViewModel extends AndroidViewModel {
 
     }
 
+    public Term getTerm(long term_id) {
+
+        return termRepository.getTerm(term_id);
+
+    }
+
+    public long insert(Term term) {
+
+        return termRepository.insert(term);
+
+    }
+
+    public void delete(Term term) {
+
+        termRepository.delete(term);
+
+    }
+
+    public void update(Term term) {
+
+        termRepository.update(term);
+
+    }
+
 }

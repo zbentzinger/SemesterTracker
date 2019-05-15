@@ -35,4 +35,22 @@ public class AssessmentViewModel extends AndroidViewModel {
 
     }
 
+    public long insert(Assessment assessment) {
+
+        return assessmentRepository.insert(assessment);
+
+    }
+
+    public void delete(Assessment assessment) {
+
+        assessmentRepository.delete(assessment);
+
+    }
+
+    public void update(Assessment assessment) {
+
+        assessmentRepository.update(assessment);
+
+    }
+
 }
