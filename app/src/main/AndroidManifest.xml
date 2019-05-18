@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ui.NoteDetail"
+            android:label="@string/title_activity_note_detail"
+            android:parentActivityName=".ui.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wgu.zbentz2.semestertracker.ui.MainActivity" />
+        </activity>
+        <activity
             android:name=".ui.AssessmentDetail"
             android:label="@string/title_activity_assessment_detail"
             android:parentActivityName=".ui.MainActivity"

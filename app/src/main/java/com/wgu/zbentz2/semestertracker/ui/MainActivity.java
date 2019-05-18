@@ -89,6 +89,11 @@ public class MainActivity extends AppCompatActivity
                 fragment = new AssessmentsList();
                 break;
 
+            case R.id.nav_notes:
+
+                fragment = new NotesList();
+                break;
+
         }
 
         if (fragment != null) {

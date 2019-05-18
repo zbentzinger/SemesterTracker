@@ -24,11 +24,13 @@ public class Note implements Serializable {
     @NonNull
     private long id;
     private long course_id;
+    private String note_name;
     private String note_body;
 
-    public Note(long course_id, String note_body) {
+    public Note(long course_id, String note_name, String note_body) {
 
         this.course_id = course_id;
+        this.note_name = note_name;
         this.note_body = note_body;
 
     }
@@ -54,6 +56,18 @@ public class Note implements Serializable {
     public void setCourse_id(long course_id) {
 
         this.course_id = course_id;
+
+    }
+
+    public String getNote_name() {
+
+        return note_name;
+
+    }
+
+    public void setNote_name(String note_name) {
+
+        this.note_name = note_name;
 
     }
 

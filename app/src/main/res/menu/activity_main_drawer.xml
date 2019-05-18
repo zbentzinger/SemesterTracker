@@ -17,6 +17,10 @@
             android:id="@+id/nav_assessments"
             android:icon="@drawable/ic_assessment"
             android:title="@string/assessments" />
+        <item
+            android:id="@+id/nav_notes"
+            android:icon="@drawable/ic_note"
+            android:title="@string/notes" />
     </group>
 
 </menu>

@@ -30,12 +30,6 @@ public class TermRepository {
 
     }
 
-    public Term getTerm(long term_id) {
-
-        return termDao.getTerm(term_id);
-
-    }
-
     public void insert(Term term) {
 
         new insertAsyncTask(termDao).execute(term);

@@ -21,7 +21,6 @@ import com.wgu.zbentz2.semestertracker.database.viewmodels.TermViewModel;
 
 import java.util.List;
 
-
 public class CourseDetail extends AppCompatActivity {
 
     private EditText courseName;
@@ -30,7 +29,7 @@ public class CourseDetail extends AppCompatActivity {
     private EditText courseMentorName;
     private EditText courseMentorPhone;
     private EditText courseMentorEmail;
-    private EditText courseStatus;
+    private Spinner courseStatus;
     private CheckBox courseNotifications;
     private Spinner termsDropdown;
 
@@ -58,7 +57,7 @@ public class CourseDetail extends AppCompatActivity {
         courseMentorName = findViewById(R.id.edit_course_mentor_name);
         courseMentorPhone = findViewById(R.id.edit_course_mentor_phone);
         courseMentorEmail = findViewById(R.id.edit_course_mentor_email);
-        courseStatus = findViewById(R.id.edit_course_status);
+        courseStatus = findViewById(R.id.edit_course_status_dropdown);
         courseNotifications = findViewById(R.id.edit_course_notifications);
         termsDropdown = findViewById(R.id.edit_course_term_dropdown);
 
@@ -110,8 +109,27 @@ public class CourseDetail extends AppCompatActivity {
             courseMentorName.setText(course.getMentor_name());
             courseMentorPhone.setText(course.getMentor_phone());
             courseMentorEmail.setText(course.getMentor_email());
-            courseStatus.setText(course.getStatus());
             courseNotifications.setChecked(course.getNotifications() > 0);
+
+            switch (course.getStatus()) {
+
+                case "In Progress":
+                    courseStatus.setSelection(0, true);
+                    break;
+
+                case "Completed":
+                    courseStatus.setSelection(1, true);
+                    break;
+
+                case "Dropped":
+                    courseStatus.setSelection(2, true);
+                    break;
+
+                case "Plan to Take":
+                    courseStatus.setSelection(3, true);
+                    break;
+
+            }
 
             this.setTitle("Edit Course");
 
@@ -134,7 +152,7 @@ public class CourseDetail extends AppCompatActivity {
         String course_mentor_name = courseMentorName.getText().toString();
         String course_mentor_phone  = courseMentorPhone.getText().toString();
         String course_mentor_email = courseMentorEmail.getText().toString();
-        String course_status = courseStatus.getText().toString();
+        String course_status = courseStatus.getSelectedItem().toString();
 
         Term selectedTerm = (Term) termsDropdown.getSelectedItem();
 

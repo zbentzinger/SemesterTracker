@@ -36,12 +36,6 @@ public class CourseRepository {
 
     }
 
-    public Course getCourse(long course_id) {
-
-        return courseDao.getCourse(course_id);
-
-    }
-
     public void insert(Course course) {
 
         new insertAsyncTask(courseDao).execute(course);
