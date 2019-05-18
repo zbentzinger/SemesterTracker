@@ -83,6 +83,7 @@ public class Term implements Serializable {
 
         if (this == o) return true;
         if (!(o instanceof Term)) return false;
+
         Term term = (Term) o;
 
         return getId() == term.getId();

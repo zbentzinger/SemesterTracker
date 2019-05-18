@@ -6,6 +6,7 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import static androidx.room.ForeignKey.CASCADE;
 
@@ -172,6 +173,29 @@ public class Course implements Serializable {
     public void setNotifications(int notifications) {
 
         this.notifications = notifications;
+
+    }
+
+    @Override public String toString() {
+
+        return this.name;
+
+    }
+
+    @Override public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (!(o instanceof Course)) return false;
+
+        Course course = (Course) o;
+
+        return getId() == course.getId();
+
+    }
+
+    @Override public int hashCode() {
+
+        return Objects.hash(getId());
 
     }
 

@@ -29,4 +29,7 @@ public interface CourseDAO {
     @Query("SELECT * FROM courses WHERE term_id = :term_id ORDER BY end_date ASC")
     LiveData<List<Course>> getAllCoursesForTerm(long term_id);
 
+    @Query("SELECT * FROM courses where id = :course_id ORDER BY end_date ASC")
+    Course getCourse(long course_id);
+
 }

@@ -62,14 +62,14 @@ public class CourseDetail extends AppCompatActivity {
         courseNotifications = findViewById(R.id.edit_course_notifications);
         termsDropdown = findViewById(R.id.edit_course_term_dropdown);
 
-        // Instantiate database view models.
+        // Instantiate database view models
         courseViewModel = ViewModelProviders.of(this).get(CourseViewModel.class);
         termViewModel = ViewModelProviders.of(this).get(TermViewModel.class);
 
-        // Populate the view with data if necessary.
+        // Populate the view with data if necessary
         initData();
 
-        // Set up and populate the spinner.
+        // Set up and populate the spinner
         setupSpinner();
 
     }
@@ -163,7 +163,7 @@ public class CourseDetail extends AppCompatActivity {
                         course_notifications
                     );
 
-                    long temp = courseViewModel.insert(course);
+                    courseViewModel.insert(course);
                     break;
 
 

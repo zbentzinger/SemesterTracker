@@ -36,6 +36,12 @@ public class CourseRepository {
 
     }
 
+    public Course getCourse(long course_id) {
+
+        return courseDao.getCourse(course_id);
+
+    }
+
     public long insert(Course course) {
 
         return courseDao.insert(course);
