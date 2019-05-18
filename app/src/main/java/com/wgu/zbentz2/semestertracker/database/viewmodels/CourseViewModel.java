@@ -37,13 +37,25 @@ public class CourseViewModel extends AndroidViewModel {
 
     public Course getCourse(long course_id) {
 
-        return courseRepository.getCourse(course_id);
+        Course course = null;
+
+        for (Course c : allCourses.getValue()) {
+
+            if (c.getId() == course_id) {
+
+                course = c;
+
+            }
+
+        }
+
+        return course;
 
     }
 
-    public long insert(Course course) {
+    public void insert(Course course) {
 
-        return courseRepository.insert(course);
+        courseRepository.insert(course);
 
     }
 
@@ -58,5 +70,4 @@ public class CourseViewModel extends AndroidViewModel {
         courseRepository.update(course);
 
     }
-
 }

@@ -54,9 +54,7 @@ public class CourseRecyclerViewAdapter extends RecyclerView.Adapter<CourseRecycl
                 holderListener.onCourseClick(getCourse(getAdapterPosition()));
 
             }
-
         }
-
     }
 
     @NonNull
@@ -83,7 +81,6 @@ public class CourseRecyclerViewAdapter extends RecyclerView.Adapter<CourseRecycl
             holder.course_card_footer.setText(current.getStart_date() + " - " + current.getEnd_date());
 
         }
-
     }
 
     @Override public int getItemCount() {
@@ -111,5 +108,4 @@ public class CourseRecyclerViewAdapter extends RecyclerView.Adapter<CourseRecycl
         notifyDataSetChanged();
 
     }
-
 }

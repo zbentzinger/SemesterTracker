@@ -83,7 +83,6 @@ public class AssessmentsList extends Fragment {
                 }
             }
         );
-
     }
 
     private AssessmentClickListener addAssessmentClickListener() {
@@ -95,7 +94,5 @@ public class AssessmentsList extends Fragment {
                 startActivity(intent);
             }
         };
-
     }
-
 }

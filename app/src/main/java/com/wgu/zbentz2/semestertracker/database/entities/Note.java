@@ -68,5 +68,4 @@ public class Note implements Serializable {
         this.note_body = note_body;
 
     }
-
 }

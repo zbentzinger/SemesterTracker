@@ -83,7 +83,6 @@ public class CoursesList extends Fragment {
                 }
             }
         );
-
     }
 
     private CourseClickListener addCourseClickListener() {
@@ -95,7 +94,5 @@ public class CoursesList extends Fragment {
                 startActivity(intent);
             }
         };
-
     }
-
 }

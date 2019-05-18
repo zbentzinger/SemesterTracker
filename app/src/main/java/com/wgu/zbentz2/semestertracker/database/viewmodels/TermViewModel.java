@@ -31,13 +31,25 @@ public class TermViewModel extends AndroidViewModel {
 
     public Term getTerm(long term_id) {
 
-        return termRepository.getTerm(term_id);
+        Term term = null;
+
+        for (Term t : allTerms.getValue()) {
+
+            if (t.getId() == term_id) {
+
+                term = t;
+
+            }
+
+        }
+
+        return term;
 
     }
 
-    public long insert(Term term) {
+    public void insert(Term term) {
 
-        return termRepository.insert(term);
+        termRepository.insert(term);
 
     }
 
@@ -52,5 +64,4 @@ public class TermViewModel extends AndroidViewModel {
         termRepository.update(term);
 
     }
-
 }

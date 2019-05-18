@@ -95,5 +95,4 @@ public class Term implements Serializable {
         return Objects.hash(getId());
 
     }
-
 }

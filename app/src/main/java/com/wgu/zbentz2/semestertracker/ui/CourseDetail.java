@@ -75,8 +75,8 @@ public class CourseDetail extends AppCompatActivity {
     }
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {
-        // Save when the user uses the up button.
 
+        // Save when the user uses the up button.
         if (item.getItemId() == android.R.id.home) {
 
             finishEditing();
@@ -88,8 +88,8 @@ public class CourseDetail extends AppCompatActivity {
     }
 
     @Override public void onBackPressed() {
-        // Save when the user uses the devices back button.
 
+        // Save when the user uses the devices back button.
         finishEditing();
 
     }
@@ -182,7 +182,6 @@ public class CourseDetail extends AppCompatActivity {
                     courseViewModel.update(course);
                     break;
 
-
             }
         }
 
@@ -214,11 +213,8 @@ public class CourseDetail extends AppCompatActivity {
                         int pos = spinnerAdapter.getPosition(term);
                         termsDropdown.setSelection(pos, true);
                     }
-
                 }
             }
         );
-
     }
-
 }

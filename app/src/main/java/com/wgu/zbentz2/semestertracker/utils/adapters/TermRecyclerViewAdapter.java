@@ -52,9 +52,7 @@ public class TermRecyclerViewAdapter extends RecyclerView.Adapter<TermRecyclerVi
                 holderListener.onTermClick(getTerm(getAdapterPosition()));
 
             }
-
         }
-
     }
 
     @NonNull
@@ -80,7 +78,6 @@ public class TermRecyclerViewAdapter extends RecyclerView.Adapter<TermRecyclerVi
             holder.term_card_footer.setText(current.getStart_date() + " - " + current.getEnd_date());
 
         }
-
     }
 
     @Override public int getItemCount() {
@@ -94,7 +91,6 @@ public class TermRecyclerViewAdapter extends RecyclerView.Adapter<TermRecyclerVi
             return 0;
 
         }
-
     }
 
     private Term getTerm(int pos) {
@@ -109,5 +105,4 @@ public class TermRecyclerViewAdapter extends RecyclerView.Adapter<TermRecyclerVi
         notifyDataSetChanged();
 
     }
-
 }

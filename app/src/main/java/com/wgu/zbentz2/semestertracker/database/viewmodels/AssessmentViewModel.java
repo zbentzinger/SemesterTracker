@@ -35,9 +35,9 @@ public class AssessmentViewModel extends AndroidViewModel {
 
     }
 
-    public long insert(Assessment assessment) {
+    public void insert(Assessment assessment) {
 
-        return assessmentRepository.insert(assessment);
+        assessmentRepository.insert(assessment);
 
     }
 
@@ -52,5 +52,4 @@ public class AssessmentViewModel extends AndroidViewModel {
         assessmentRepository.update(assessment);
 
     }
-
 }

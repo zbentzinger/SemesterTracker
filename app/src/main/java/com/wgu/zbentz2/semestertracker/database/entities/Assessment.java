@@ -120,5 +120,4 @@ public class Assessment implements Serializable {
         return this.name;
 
     }
-
 }

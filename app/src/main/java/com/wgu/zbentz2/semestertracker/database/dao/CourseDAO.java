@@ -15,7 +15,7 @@ import java.util.List;
 public interface CourseDAO {
 
     @Insert
-    long insert(Course course);
+    void insert(Course course);
 
     @Update
     void update(Course course);

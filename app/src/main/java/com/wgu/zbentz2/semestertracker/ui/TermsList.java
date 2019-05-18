@@ -83,7 +83,6 @@ public class TermsList extends Fragment {
                 }
             }
         );
-
     }
 
     private TermClickListener addTermClickListener() {
@@ -95,7 +94,5 @@ public class TermsList extends Fragment {
                 startActivity(intent);
             }
         };
-
     }
-
 }

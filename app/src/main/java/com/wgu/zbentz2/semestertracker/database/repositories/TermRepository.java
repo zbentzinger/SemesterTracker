@@ -36,9 +36,9 @@ public class TermRepository {
 
     }
 
-    public long insert(Term term) {
+    public void insert(Term term) {
 
-        return termDao.insert(term);
+        new insertAsyncTask(termDao).execute(term);
 
     }
 
@@ -54,6 +54,24 @@ public class TermRepository {
 
     }
 
+    private static class insertAsyncTask extends AsyncTask<Term, Void, Void> {
+
+        private TermDAO asyncTermDao;
+
+        insertAsyncTask(TermDAO dao) {
+
+            asyncTermDao = dao;
+
+        }
+
+        @Override protected Void doInBackground(final Term... params) {
+
+            asyncTermDao.insert(params[0]);
+            return null;
+
+        }
+    }
+
     private static class deleteAsyncTask extends AsyncTask<Term, Void, Void> {
 
         private TermDAO asyncTermDao;
@@ -64,14 +82,12 @@ public class TermRepository {
 
         }
 
-
         @Override protected Void doInBackground(final Term... params) {
 
             asyncTermDao.delete(params[0]);
             return null;
 
         }
-
     }
 
     private static class updateAsyncTask extends AsyncTask<Term, Void, Void> {
@@ -84,14 +100,11 @@ public class TermRepository {
 
         }
 
-
         @Override protected Void doInBackground(final Term... params) {
 
             asyncTermDao.update(params[0]);
             return null;
 
         }
-
     }
-
 }

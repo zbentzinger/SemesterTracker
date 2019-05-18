@@ -43,16 +43,11 @@ public abstract class SemesterTrackerRoomDB extends RoomDatabase {
                     context.getApplicationContext(),
                     SemesterTrackerRoomDB.class,
                     "semester_tracker_database"
-                )
-                .allowMainThreadQueries() // So we can return the last inserted PK.
-                .build();
-
+                ).build();
             }
-
         }
 
         return INSTANCE;
 
     }
-
 }

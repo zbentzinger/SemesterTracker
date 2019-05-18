@@ -35,9 +35,9 @@ public class NoteViewModel extends AndroidViewModel {
 
     }
 
-    public long insert(Note note) {
+    public void insert(Note note) {
 
-        return noteRepository.insert(note);
+        noteRepository.insert(note);
 
     }
 
@@ -52,5 +52,4 @@ public class NoteViewModel extends AndroidViewModel {
         noteRepository.update(note);
 
     }
-
 }

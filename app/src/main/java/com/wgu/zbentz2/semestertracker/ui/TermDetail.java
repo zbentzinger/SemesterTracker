@@ -20,27 +20,54 @@ public class TermDetail extends AppCompatActivity {
     private EditText termEndDate;
 
     private TermViewModel termViewModel;
+    private Term term;
 
     private String action;
-
-    private Term term;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_detail);
 
-        // Initialize field variables.
+        // Toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Instantiate class variables
         termName = findViewById(R.id.edit_term_name);
         termStartDate = findViewById(R.id.edit_term_start_date);
         termEndDate = findViewById(R.id.edit_term_end_date);
 
+        // Instantiate database view models
         termViewModel = ViewModelProviders.of(this).get(TermViewModel.class);
 
-        // Set up Action Bar.
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // Populate the view with data if necessary
+        initData();
+
+    }
+
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+
+        // Save when the user uses the up button.
+        if (item.getItemId() == android.R.id.home) {
+
+            finishEditing();
+
+        }
+
+        return true;
+
+    }
+
+    @Override public void onBackPressed() {
+
+        // Save when the user uses the devices back button.
+        finishEditing();
+
+    }
+
+    private void initData() {
 
         // Get the intent from the previous view and set config based on it.
         Intent intent = getIntent();
@@ -66,33 +93,15 @@ public class TermDetail extends AppCompatActivity {
 
     }
 
-    @Override public boolean onOptionsItemSelected(MenuItem item) {
-        // Save when the user uses the up button.
-
-        if (item.getItemId() == android.R.id.home) {
-
-            finishEditing();
-
-        }
-
-        return true;
-
-    }
-
-    @Override public void onBackPressed() {
-        // Save when the user uses the devices back button.
-
-        finishEditing();
-
-    }
-
     private void finishEditing() {
 
         String term_name = termName.getText().toString();
         String term_start_date  = termStartDate.getText().toString();
         String term_end_date = termEndDate.getText().toString();
 
-        if (term_name.length() > 0 && term_start_date.length() > 0 && term_end_date.length() > 0) {
+        if (term_name.length() > 0 &&
+            term_start_date.length() > 0 &&
+            term_end_date.length() > 0) {
 
             switch (action) {
 
@@ -100,7 +109,7 @@ public class TermDetail extends AppCompatActivity {
 
                     term = new Term(term_name, term_start_date, term_end_date);
 
-                    long temp = termViewModel.insert(term);
+                    termViewModel.insert(term);
                     break;
 
 
@@ -113,12 +122,10 @@ public class TermDetail extends AppCompatActivity {
                     termViewModel.update(term);
                     break;
 
-
             }
         }
 
         finish();
 
     }
-
 }

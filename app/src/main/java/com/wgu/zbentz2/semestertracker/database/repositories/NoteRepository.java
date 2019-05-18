@@ -36,9 +36,9 @@ public class NoteRepository {
 
     }
 
-    public long insert(Note note) {
+    public void insert(Note note) {
 
-        return noteDao.insert(note);
+        new insertAsyncTask(noteDao).execute(note);
 
     }
 
@@ -52,6 +52,24 @@ public class NoteRepository {
 
         new updateAsyncTask(noteDao).execute(note);
 
+    }
+
+    private static class insertAsyncTask extends AsyncTask<Note, Void, Void> {
+
+        private NoteDAO asyncNoteDao;
+
+        insertAsyncTask(NoteDAO noteDao) {
+
+            asyncNoteDao = noteDao;
+
+        }
+
+        @Override protected Void doInBackground(Note... notes) {
+
+            asyncNoteDao.insert(notes[0]);
+            return null;
+
+        }
     }
 
     private static class deleteAsyncTask extends AsyncTask<Note, Void, Void> {
@@ -70,7 +88,6 @@ public class NoteRepository {
             return null;
 
         }
-
     }
 
     private static class updateAsyncTask extends AsyncTask<Note, Void, Void> {
@@ -89,7 +106,5 @@ public class NoteRepository {
             return null;
 
         }
-
     }
-
 }

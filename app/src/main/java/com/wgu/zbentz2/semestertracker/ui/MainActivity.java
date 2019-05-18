@@ -21,12 +21,13 @@ public class MainActivity extends AppCompatActivity
     @Override protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
+        // Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Nav
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -40,7 +41,9 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        // Fragments
         loadFragment(R.id.nav_terms);
+
         navigationView.getMenu().getItem(0).setChecked(true);
 
     }
@@ -56,7 +59,6 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
 
         }
-
     }
 
     @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -101,5 +103,4 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
 
     }
-
 }

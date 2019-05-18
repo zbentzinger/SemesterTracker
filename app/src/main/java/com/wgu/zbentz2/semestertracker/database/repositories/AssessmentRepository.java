@@ -36,9 +36,9 @@ public class AssessmentRepository {
 
     }
 
-    public long insert(Assessment assessment) {
+    public void insert(Assessment assessment) {
 
-        return assessmentDao.insert(assessment);
+        new insertAsyncTask(assessmentDao).execute(assessment);
 
     }
 
@@ -52,6 +52,24 @@ public class AssessmentRepository {
 
         new updateAsyncTask(assessmentDao).execute(assessment);
 
+    }
+
+    private static class insertAsyncTask extends AsyncTask<Assessment, Void, Void> {
+
+        private AssessmentDAO asyncAssessmentDao;
+
+        insertAsyncTask(AssessmentDAO assessmentDao) {
+
+            asyncAssessmentDao = assessmentDao;
+
+        }
+
+        @Override protected Void doInBackground(Assessment... assessments) {
+
+            asyncAssessmentDao.insert(assessments[0]);
+            return null;
+
+        }
     }
 
     private static class deleteAsyncTask extends AsyncTask<Assessment, Void, Void> {
@@ -70,7 +88,6 @@ public class AssessmentRepository {
             return null;
 
         }
-
     }
 
     private static class updateAsyncTask extends AsyncTask<Assessment, Void, Void> {
@@ -89,7 +106,5 @@ public class AssessmentRepository {
             return null;
 
         }
-
     }
-
 }

@@ -42,9 +42,9 @@ public class CourseRepository {
 
     }
 
-    public long insert(Course course) {
+    public void insert(Course course) {
 
-        return courseDao.insert(course);
+        new insertAsyncTask(courseDao).execute(course);
 
     }
 
@@ -60,24 +60,22 @@ public class CourseRepository {
 
     }
 
-
-    private static class updateAsyncTask extends AsyncTask<Course, Void, Void> {
+    private static class insertAsyncTask extends AsyncTask<Course, Void, Void> {
 
         private CourseDAO asyncCourseDao;
 
-        updateAsyncTask(CourseDAO courseDao) {
+        insertAsyncTask(CourseDAO courseDao) {
 
             asyncCourseDao = courseDao;
 
         }
 
-        @Override protected Void doInBackground(final Course... courses) {
+        @Override protected Void doInBackground(Course... courses) {
 
-            asyncCourseDao.update(courses[0]);
+            asyncCourseDao.insert(courses[0]);
             return null;
 
         }
-
     }
 
     private static class deleteAsyncTask extends AsyncTask<Course, Void, Void> {
@@ -96,7 +94,23 @@ public class CourseRepository {
             return null;
 
         }
-
     }
 
+    private static class updateAsyncTask extends AsyncTask<Course, Void, Void> {
+
+        private CourseDAO asyncCourseDao;
+
+        updateAsyncTask(CourseDAO courseDao) {
+
+            asyncCourseDao = courseDao;
+
+        }
+
+        @Override protected Void doInBackground(final Course... courses) {
+
+            asyncCourseDao.update(courses[0]);
+            return null;
+
+        }
+    }
 }

@@ -54,9 +54,7 @@ public class AssessmentRecyclerViewAdapter extends RecyclerView.Adapter<Assessme
                 holderListener.onAssessmentClick(getAssessment(getAdapterPosition()));
 
             }
-
         }
-
     }
 
     @NonNull
@@ -83,7 +81,6 @@ public class AssessmentRecyclerViewAdapter extends RecyclerView.Adapter<Assessme
             holder.assessment_card_footer.setText(current.getDue_date());
 
         }
-
     }
 
     @Override public int getItemCount() {
@@ -111,5 +108,4 @@ public class AssessmentRecyclerViewAdapter extends RecyclerView.Adapter<Assessme
         notifyDataSetChanged();
 
     }
-
 }
