@@ -26,4 +26,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_note_detail">NoteDetail</string>
     <string name="notes">Notes</string>
+    <string name="term_details">Term Details</string>
+    <string name="no_courses">No Courses</string>
+    <string name="term_end_date">Term End Date</string>
+    <string name="term_start_date">Term Start Date</string>
+    <string name="term_name">Term Name</string>
 </resources>

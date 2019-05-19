@@ -62,6 +62,7 @@ public class TermDetail extends AppCompatActivity {
         termStartDate = findViewById(R.id.edit_term_start_date);
         termEndDate = findViewById(R.id.edit_term_end_date);
         termCourseList = findViewById(R.id.edit_term_course_list);
+        termCourseList.setEmptyView(findViewById(R.id.edit_term_empty_text));
 
         // Instantiate database view models
         termViewModel = ViewModelProviders.of(this).get(TermViewModel.class);
@@ -136,7 +137,7 @@ public class TermDetail extends AppCompatActivity {
 
         final ArrayAdapter<Course> listAdapter = new ArrayAdapter<>(
             TermDetail.this,
-            android.R.layout.simple_list_item_1
+            R.layout.term_list_item
         );
 
         courseViewModel.getAllCoursesForTerm(term_id).observe(
