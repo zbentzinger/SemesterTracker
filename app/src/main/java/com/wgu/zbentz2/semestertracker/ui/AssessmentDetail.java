@@ -29,7 +29,7 @@ import java.util.List;
 public class AssessmentDetail extends AppCompatActivity {
 
     private EditText assessmentName;
-    private EditText assessmentType;
+    private Spinner assessmentType;
     private EditText assessmentDueDate;
     private CheckBox assessmentNotifications;
     private Spinner coursesDropdown;
@@ -107,9 +107,20 @@ public class AssessmentDetail extends AppCompatActivity {
             boolean is_checked = assessment.getNotifications() > 0;
 
             assessmentName.setText(assessment.getName());
-            assessmentType.setText(assessment.getType());
             assessmentDueDate.setText(assessment.getDue_date());
             assessmentNotifications.setChecked(is_checked);
+
+            switch (assessment.getType()) {
+
+                case "Objective":
+                    assessmentType.setSelection(0, true);
+                    break;
+
+                case "Performance":
+                    assessmentType.setSelection(1, true);
+                    break;
+
+            }
 
             this.setTitle("Edit Assessment");
 
@@ -163,7 +174,7 @@ public class AssessmentDetail extends AppCompatActivity {
 
         int assessment_notifications = assessmentNotifications.isChecked() ? 1 : 0;
         String assessment_name = assessmentName.getText().toString();
-        String assessment_type = assessmentType.getText().toString();
+        String assessment_type = assessmentType.getSelectedItem().toString();
         String assessment_due_date = assessmentDueDate.getText().toString();
 
         Course selectedCourse = (Course) coursesDropdown.getSelectedItem();

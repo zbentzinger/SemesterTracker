@@ -11,12 +11,15 @@
     <string name="term_active_checkbox">Active</string>
 
     <string-array name="course_statuses">
-        <item>
-            <string name="course_in_prog">In Progress</string>
-        </item>
+        <item>In Progress</item>
         <item>Completed</item>
         <item>Dropped</item>
         <item>Plan to Take</item>
+    </string-array>
+
+    <string-array name="assessment_types">
+        <item>Objective</item>
+        <item>Performance</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
