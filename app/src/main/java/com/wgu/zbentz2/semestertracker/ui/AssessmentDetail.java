@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,8 +17,10 @@ import androidx.lifecycle.ViewModelProviders;
 import com.wgu.zbentz2.semestertracker.R;
 import com.wgu.zbentz2.semestertracker.database.entities.Assessment;
 import com.wgu.zbentz2.semestertracker.database.entities.Course;
+import com.wgu.zbentz2.semestertracker.database.entities.Note;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.AssessmentViewModel;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.CourseViewModel;
+import com.wgu.zbentz2.semestertracker.database.viewmodels.NoteViewModel;
 
 import java.util.List;
 
@@ -28,9 +31,11 @@ public class AssessmentDetail extends AppCompatActivity {
     private EditText assessmentDueDate;
     private CheckBox assessmentNotifications;
     private Spinner coursesDropdown;
+    private ListView notesList;
 
     private AssessmentViewModel assessmentViewModel;
     private CourseViewModel courseViewModel;
+    private NoteViewModel noteViewModel;
     private Assessment assessment;
     private Course course;
 
@@ -52,10 +57,12 @@ public class AssessmentDetail extends AppCompatActivity {
         assessmentDueDate = findViewById(R.id.edit_assessment_due_date);
         assessmentNotifications = findViewById(R.id.edit_assessment_notifications);
         coursesDropdown = findViewById(R.id.edit_assessment_course_dropdown);
+        notesList = findViewById(R.id.edit_assessment_notes_list);
 
         // Instantiate database view models
         assessmentViewModel = ViewModelProviders.of(this).get(AssessmentViewModel.class);
         courseViewModel = ViewModelProviders.of(this).get(CourseViewModel.class);
+        noteViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
 
         // Populate the view with data if necessary
         initData();
@@ -104,6 +111,8 @@ public class AssessmentDetail extends AppCompatActivity {
 
             this.setTitle("Edit Assessment");
 
+            populateListView(assessment.getCourse_id());
+
         } else {
 
             action = Intent.ACTION_INSERT;
@@ -111,6 +120,28 @@ public class AssessmentDetail extends AppCompatActivity {
             this.setTitle("New Assessment");
 
         }
+    }
+
+    private void populateListView(long course_id) {
+
+        final ArrayAdapter<Note> listAdapter = new ArrayAdapter<>(
+            AssessmentDetail.this,
+            android.R.layout.simple_list_item_1
+        );
+
+        noteViewModel.getAllNotesForCourse(course_id).observe(
+            this,
+            new Observer<List<Note>>() {
+                @Override public void onChanged(final List<Note> notes) {
+
+                    listAdapter.addAll(notes);
+                    listAdapter.notifyDataSetChanged();
+                    notesList.setAdapter(listAdapter);
+
+                }
+            }
+        );
+
     }
 
     private void finishEditing() {

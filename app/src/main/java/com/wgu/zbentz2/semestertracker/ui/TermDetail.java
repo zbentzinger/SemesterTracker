@@ -3,23 +3,33 @@ package com.wgu.zbentz2.semestertracker.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.wgu.zbentz2.semestertracker.R;
+import com.wgu.zbentz2.semestertracker.database.entities.Course;
 import com.wgu.zbentz2.semestertracker.database.entities.Term;
+import com.wgu.zbentz2.semestertracker.database.viewmodels.CourseViewModel;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.TermViewModel;
+
+import java.util.List;
+
 
 public class TermDetail extends AppCompatActivity {
 
     private EditText termName;
     private EditText termStartDate;
     private EditText termEndDate;
+    private ListView termCourseList;
 
     private TermViewModel termViewModel;
+    private CourseViewModel courseViewModel;
     private Term term;
 
     private String action;
@@ -38,9 +48,11 @@ public class TermDetail extends AppCompatActivity {
         termName = findViewById(R.id.edit_term_name);
         termStartDate = findViewById(R.id.edit_term_start_date);
         termEndDate = findViewById(R.id.edit_term_end_date);
+        termCourseList = findViewById(R.id.edit_term_course_list);
 
         // Instantiate database view models
         termViewModel = ViewModelProviders.of(this).get(TermViewModel.class);
+        courseViewModel = ViewModelProviders.of(this).get(CourseViewModel.class);
 
         // Populate the view with data if necessary
         initData();
@@ -81,6 +93,8 @@ public class TermDetail extends AppCompatActivity {
             termStartDate.setText(term.getStart_date());
             termEndDate.setText(term.getEnd_date());
 
+            populateListView(term.getId());
+
             this.setTitle("Edit Term");
 
         } else {
@@ -90,6 +104,28 @@ public class TermDetail extends AppCompatActivity {
             this.setTitle("New Term");
 
         }
+
+    }
+
+    private void populateListView(long term_id) {
+
+        final ArrayAdapter<Course> listAdapter = new ArrayAdapter<>(
+            TermDetail.this,
+            android.R.layout.simple_list_item_1
+        );
+
+        courseViewModel.getAllCoursesForTerm(term_id).observe(
+            this,
+            new Observer<List<Course>>() {
+                @Override public void onChanged(final List<Course> courses) {
+
+                    listAdapter.addAll(courses);
+                    listAdapter.notifyDataSetChanged();
+                    termCourseList.setAdapter(listAdapter);
+
+                }
+            }
+        );
 
     }
 

@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,8 +15,10 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.wgu.zbentz2.semestertracker.R;
+import com.wgu.zbentz2.semestertracker.database.entities.Assessment;
 import com.wgu.zbentz2.semestertracker.database.entities.Course;
 import com.wgu.zbentz2.semestertracker.database.entities.Term;
+import com.wgu.zbentz2.semestertracker.database.viewmodels.AssessmentViewModel;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.CourseViewModel;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.TermViewModel;
 
@@ -32,7 +35,9 @@ public class CourseDetail extends AppCompatActivity {
     private Spinner courseStatus;
     private CheckBox courseNotifications;
     private Spinner termsDropdown;
+    private ListView courseAssessmentList;
 
+    private AssessmentViewModel assessmentViewModel;
     private TermViewModel termViewModel;
     private CourseViewModel courseViewModel;
     private Course course;
@@ -60,8 +65,10 @@ public class CourseDetail extends AppCompatActivity {
         courseStatus = findViewById(R.id.edit_course_status_dropdown);
         courseNotifications = findViewById(R.id.edit_course_notifications);
         termsDropdown = findViewById(R.id.edit_course_term_dropdown);
+        courseAssessmentList = findViewById(R.id.edit_course_assessments_list);
 
         // Instantiate database view models
+        assessmentViewModel = ViewModelProviders.of(this).get(AssessmentViewModel.class);
         courseViewModel = ViewModelProviders.of(this).get(CourseViewModel.class);
         termViewModel = ViewModelProviders.of(this).get(TermViewModel.class);
 
@@ -131,6 +138,8 @@ public class CourseDetail extends AppCompatActivity {
 
             }
 
+            populateListView(course.getId());
+
             this.setTitle("Edit Course");
 
         } else {
@@ -140,6 +149,28 @@ public class CourseDetail extends AppCompatActivity {
             this.setTitle("New Course");
 
         }
+
+    }
+
+    private void populateListView(long course_id) {
+
+        final ArrayAdapter<Assessment> listAdapter = new ArrayAdapter<>(
+            CourseDetail.this,
+            android.R.layout.simple_list_item_1
+        );
+
+        assessmentViewModel.getAllAssessmentsForCourse(course_id).observe(
+            this,
+            new Observer<List<Assessment>>() {
+                @Override public void onChanged(final List<Assessment> assessments) {
+
+                    listAdapter.addAll(assessments);
+                    listAdapter.notifyDataSetChanged();
+                    courseAssessmentList.setAdapter(listAdapter);
+
+                }
+            }
+        );
 
     }
 
