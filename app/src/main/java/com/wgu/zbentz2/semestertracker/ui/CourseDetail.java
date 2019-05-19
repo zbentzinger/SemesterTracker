@@ -3,6 +3,8 @@ package com.wgu.zbentz2.semestertracker.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -164,6 +166,7 @@ public class CourseDetail extends AppCompatActivity {
             new Observer<List<Assessment>>() {
                 @Override public void onChanged(final List<Assessment> assessments) {
 
+                    listAdapter.clear();
                     listAdapter.addAll(assessments);
                     listAdapter.notifyDataSetChanged();
                     courseAssessmentList.setAdapter(listAdapter);
@@ -172,6 +175,18 @@ public class CourseDetail extends AppCompatActivity {
             }
         );
 
+        courseAssessmentList.setOnItemClickListener(
+            new AdapterView.OnItemClickListener() {
+                @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    Assessment selectedAssessment = (Assessment) courseAssessmentList.getItemAtPosition(position);
+                    Intent intent = new Intent(CourseDetail.this, AssessmentDetail.class);
+                    intent.putExtra("Assessment", selectedAssessment);
+                    startActivity(intent);
+
+                }
+            }
+        );
     }
 
     private void finishEditing() {

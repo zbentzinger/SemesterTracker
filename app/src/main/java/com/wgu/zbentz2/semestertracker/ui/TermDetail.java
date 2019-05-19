@@ -3,6 +3,8 @@ package com.wgu.zbentz2.semestertracker.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -119,9 +121,23 @@ public class TermDetail extends AppCompatActivity {
             new Observer<List<Course>>() {
                 @Override public void onChanged(final List<Course> courses) {
 
+                    listAdapter.clear();
                     listAdapter.addAll(courses);
-                    listAdapter.notifyDataSetChanged();
                     termCourseList.setAdapter(listAdapter);
+                    listAdapter.notifyDataSetChanged();
+
+                }
+            }
+        );
+
+        termCourseList.setOnItemClickListener(
+            new AdapterView.OnItemClickListener() {
+                @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    Course selectedCourse = (Course) termCourseList.getItemAtPosition(position);
+                    Intent intent = new Intent(TermDetail.this, CourseDetail.class);
+                    intent.putExtra("Course", selectedCourse);
+                    startActivity(intent);
 
                 }
             }
