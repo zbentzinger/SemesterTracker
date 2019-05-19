@@ -1,5 +1,6 @@
 package com.wgu.zbentz2.semestertracker.ui;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -24,10 +26,15 @@ import com.wgu.zbentz2.semestertracker.database.viewmodels.AssessmentViewModel;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.CourseViewModel;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.NoteViewModel;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class AssessmentDetail extends AppCompatActivity {
 
+    private Calendar dueDateCal;
     private EditText assessmentName;
     private Spinner assessmentType;
     private EditText assessmentDueDate;
@@ -42,6 +49,7 @@ public class AssessmentDetail extends AppCompatActivity {
     private Course course;
 
     private String action;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 
     @Override protected void onCreate(Bundle savedInstanceState) {
 
@@ -54,6 +62,7 @@ public class AssessmentDetail extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Instantiate class variables
+        dueDateCal = Calendar.getInstance();
         assessmentName = findViewById(R.id.edit_assessment_name);
         assessmentType = findViewById(R.id.edit_assessment_type);
         assessmentDueDate = findViewById(R.id.edit_assessment_due_date);
@@ -107,7 +116,6 @@ public class AssessmentDetail extends AppCompatActivity {
             boolean is_checked = assessment.getNotifications() > 0;
 
             assessmentName.setText(assessment.getName());
-            assessmentDueDate.setText(assessment.getDue_date());
             assessmentNotifications.setChecked(is_checked);
 
             switch (assessment.getType()) {
@@ -122,9 +130,20 @@ public class AssessmentDetail extends AppCompatActivity {
 
             }
 
-            this.setTitle("Edit Assessment");
+            try {
+
+                dueDateCal.setTime(dateFormat.parse(assessment.getDue_date()));
+
+            } catch (ParseException e) {
+
+                e.printStackTrace();
+
+            }
+
 
             populateListView(assessment.getCourse_id());
+
+            this.setTitle("Edit Assessment");
 
         } else {
 
@@ -133,6 +152,9 @@ public class AssessmentDetail extends AppCompatActivity {
             this.setTitle("New Assessment");
 
         }
+
+        setupCalendar(assessmentDueDate, dueDateCal);
+
     }
 
     private void populateListView(long course_id) {
@@ -165,6 +187,36 @@ public class AssessmentDetail extends AppCompatActivity {
                     intent.putExtra("Note", selectedNote);
                     startActivity(intent);
 
+                }
+            }
+        );
+    }
+
+    private void setupCalendar(final EditText field, final Calendar calendar) {
+
+        // Set the initial value.
+        field.setText(dateFormat.format(calendar.getTime()));
+
+        final DatePickerDialog.OnDateSetListener fieldDate = new DatePickerDialog.OnDateSetListener() {
+            @Override public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                // Update the field value on change.
+                field.setText(dateFormat.format(calendar.getTime()));
+            }
+        };
+
+        field.setOnClickListener(
+            new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    new DatePickerDialog(
+                        AssessmentDetail.this,
+                        fieldDate,
+                        calendar.get(Calendar.YEAR),
+                        calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH)
+                    ).show();
                 }
             }
         );

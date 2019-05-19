@@ -1,5 +1,6 @@
 package com.wgu.zbentz2.semestertracker.ui;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -24,10 +26,16 @@ import com.wgu.zbentz2.semestertracker.database.viewmodels.AssessmentViewModel;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.CourseViewModel;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.TermViewModel;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class CourseDetail extends AppCompatActivity {
 
+    private Calendar startCal;
+    private Calendar endCal;
     private EditText courseName;
     private EditText courseStartDate;
     private EditText courseEndDate;
@@ -46,6 +54,7 @@ public class CourseDetail extends AppCompatActivity {
     private Term term;
 
     private String action;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 
     @Override protected void onCreate(Bundle savedInstanceState) {
 
@@ -58,6 +67,8 @@ public class CourseDetail extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Instantiate class variables
+        startCal = Calendar.getInstance();
+        endCal = Calendar.getInstance();
         courseName = findViewById(R.id.edit_course_name);
         courseStartDate = findViewById(R.id.edit_course_start_date);
         courseEndDate = findViewById(R.id.edit_course_end_date);
@@ -113,8 +124,8 @@ public class CourseDetail extends AppCompatActivity {
             action = Intent.ACTION_EDIT;
 
             courseName.setText(course.getName());
-            courseStartDate.setText(course.getStart_date());
-            courseEndDate.setText(course.getEnd_date());
+            //courseStartDate.setText(course.getStart_date());
+            //courseEndDate.setText(course.getEnd_date());
             courseMentorName.setText(course.getMentor_name());
             courseMentorPhone.setText(course.getMentor_phone());
             courseMentorEmail.setText(course.getMentor_email());
@@ -140,6 +151,17 @@ public class CourseDetail extends AppCompatActivity {
 
             }
 
+            try {
+
+                startCal.setTime(dateFormat.parse(course.getStart_date()));
+                endCal.setTime(dateFormat.parse(course.getEnd_date()));
+
+            } catch (ParseException e) {
+
+                e.printStackTrace();
+
+            }
+
             populateListView(course.getId());
 
             this.setTitle("Edit Course");
@@ -151,6 +173,9 @@ public class CourseDetail extends AppCompatActivity {
             this.setTitle("New Course");
 
         }
+
+        setupCalendar(courseStartDate, startCal);
+        setupCalendar(courseEndDate, endCal);
 
     }
 
@@ -184,6 +209,36 @@ public class CourseDetail extends AppCompatActivity {
                     intent.putExtra("Assessment", selectedAssessment);
                     startActivity(intent);
 
+                }
+            }
+        );
+    }
+
+    private void setupCalendar(final EditText field, final Calendar calendar) {
+
+        // Set the initial value.
+        field.setText(dateFormat.format(calendar.getTime()));
+
+        final DatePickerDialog.OnDateSetListener fieldDate = new DatePickerDialog.OnDateSetListener() {
+            @Override public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                // Update the field value on change.
+                field.setText(dateFormat.format(calendar.getTime()));
+            }
+        };
+
+        field.setOnClickListener(
+            new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    new DatePickerDialog(
+                        CourseDetail.this,
+                        fieldDate,
+                        calendar.get(Calendar.YEAR),
+                        calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH)
+                    ).show();
                 }
             }
         );
