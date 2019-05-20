@@ -69,6 +69,7 @@ public class AssessmentDetail extends AppCompatActivity {
         assessmentNotifications = findViewById(R.id.edit_assessment_notifications);
         coursesDropdown = findViewById(R.id.edit_assessment_course_dropdown);
         notesList = findViewById(R.id.edit_assessment_notes_list);
+        notesList.setEmptyView(findViewById(R.id.edit_assessment_empty_notes));
 
         // Instantiate database view models
         assessmentViewModel = ViewModelProviders.of(this).get(AssessmentViewModel.class);
@@ -161,7 +162,7 @@ public class AssessmentDetail extends AppCompatActivity {
 
         final ArrayAdapter<Note> listAdapter = new ArrayAdapter<>(
             AssessmentDetail.this,
-            android.R.layout.simple_list_item_1
+            R.layout.note_list_item
         );
 
         noteViewModel.getAllNotesForCourse(course_id).observe(
