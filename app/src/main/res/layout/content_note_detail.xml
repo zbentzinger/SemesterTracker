@@ -1,40 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp" >
+    android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/edit_note_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName|textCapSentences"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp" >
 
-    <Spinner
-        android:id="@+id/edit_note_course_dropdown"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <EditText
+            android:id="@+id/edit_note_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_note"
+            android:drawablePadding="8dp"
+            android:inputType="textPersonName|textCapSentences"
+            android:paddingStart="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_note_name_label" />
 
-    <EditText
-        android:id="@+id/edit_note_body"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="start|top"
-        android:inputType="textMultiLine|textCapSentences"
-        app:layout_constraintBottom_toTopOf="@+id/edit_note_course_dropdown"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_note_name" />
+        <Spinner
+            android:id="@+id/edit_note_course_dropdown"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/edit_note_course_icon"
+            app:layout_constraintTop_toBottomOf="@+id/edit_note_select_course_dropdown_label" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/edit_note_body"
+            android:layout_width="0dp"
+            android:layout_height="500dp"
+            android:layout_marginTop="8dp"
+            android:gravity="start|top"
+            android:inputType="textMultiLine|textCapSentences"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_note_body_divider" />
+
+        <TextView
+            android:id="@+id/edit_note_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notes Detail"
+            android:textSize="32sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/edit_note_header_divider"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_note_header" />
+
+        <TextView
+            android:id="@+id/edit_note_name_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Note Name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_note_header_divider" />
+
+        <TextView
+            android:id="@+id/edit_note_select_course_dropdown_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Select Course"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_note_name" />
+
+        <ImageView
+            android:id="@+id/edit_note_course_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/edit_note_course_dropdown"
+            app:layout_constraintStart_toStartOf="@+id/edit_note_select_course_dropdown_label"
+            app:layout_constraintTop_toTopOf="@+id/edit_note_course_dropdown"
+            app:srcCompat="@drawable/ic_course" />
+
+        <View
+            android:id="@+id/edit_note_course_dropdown_divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_note_course_dropdown" />
+
+        <TextView
+            android:id="@+id/edit_note_body_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Body"
+            android:textSize="32sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_note_course_dropdown_divider" />
+
+        <View
+            android:id="@+id/edit_note_body_divider"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_note_body_header" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

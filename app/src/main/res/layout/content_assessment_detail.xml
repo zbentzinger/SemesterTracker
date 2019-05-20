@@ -124,7 +124,7 @@
 
         <View
             android:id="@+id/edit_assessment_type_divider"
-            android:layout_width="379dp"
+            android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="2dp"
             android:background="@android:color/darker_gray"
@@ -161,7 +161,7 @@
 
         <View
             android:id="@+id/edit_assessment_select_course_divider"
-            android:layout_width="379dp"
+            android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="2dp"
             android:background="@android:color/darker_gray"
@@ -183,7 +183,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="@string/notes"
+            android:text="Note List"
             android:textSize="32sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_assessment_notifications_text" />
@@ -205,7 +205,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="No Notes Found"
+            android:text="No Notes"
             android:textSize="20sp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"

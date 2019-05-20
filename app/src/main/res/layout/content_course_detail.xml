@@ -119,7 +119,7 @@
 
         <ListView
             android:id="@+id/edit_course_assessments_list"
-            android:layout_width="380dp"
+            android:layout_width="0dp"
             android:layout_height="263dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -237,7 +237,7 @@
 
         <View
             android:id="@+id/edit_course_status_divider"
-            android:layout_width="379dp"
+            android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="2dp"
             android:background="@android:color/darker_gray"
@@ -247,7 +247,7 @@
 
         <View
             android:id="@+id/edit_course_term_dropdown_divider"
-            android:layout_width="379dp"
+            android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="2dp"
             android:background="@android:color/darker_gray"
