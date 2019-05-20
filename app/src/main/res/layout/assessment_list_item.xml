@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:drawableStart="@drawable/ic_course"
-    android:drawablePadding="8dp"
+    android:drawableStart="@drawable/ic_assessment"
+    android:drawablePadding="5sp"
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
     android:textSize="16sp">
