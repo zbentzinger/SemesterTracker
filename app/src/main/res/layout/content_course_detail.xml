@@ -2,17 +2,14 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        tools:context=".ui.CourseDetail"
-        tools:showIn="@layout/activity_course_detail">
+        android:layout_height="wrap_content">
 
         <EditText
             android:id="@+id/edit_course_name"
@@ -20,7 +17,7 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_course"
             android:drawablePadding="8dp"
-            android:inputType="textPersonName"
+            android:inputType="textPersonName|textCapWords"
             android:paddingStart="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +55,7 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_mentor"
             android:drawablePadding="8dp"
-            android:inputType="textPersonName"
+            android:inputType="textPersonName|textCapWords"
             android:paddingStart="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +79,6 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_email"
             android:drawablePadding="8dp"
-            android:hint="Mentor Email"
             android:inputType="textEmailAddress"
             android:paddingStart="0dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -130,7 +126,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Course Details"
+            android:text="@string/course_details"
             android:textSize="32sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -150,7 +146,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Course Name"
+            android:text="@string/course_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_header_divider" />
 
@@ -159,7 +155,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Course Start Date"
+            android:text="@string/course_start_date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_name" />
 
@@ -168,7 +164,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Course End Date"
+            android:text="@string/course_end_date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_start_date" />
 
@@ -177,7 +173,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Mentor Name"
+            android:text="@string/mentor_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_mentor_divider" />
 
@@ -186,7 +182,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Mentor Phone"
+            android:text="@string/mentor_phone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_mentor_name" />
 
@@ -195,7 +191,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Mentor Email"
+            android:text="@string/mentor_email"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_mentor_phone" />
 
@@ -204,7 +200,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Status "
+            android:text="@string/status"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_term_dropdown" />
 
@@ -215,14 +211,15 @@
             app:layout_constraintBottom_toBottomOf="@+id/edit_course_status_dropdown"
             app:layout_constraintStart_toStartOf="@+id/edit_course_status_dropdown_label"
             app:layout_constraintTop_toTopOf="@+id/edit_course_status_dropdown"
-            app:srcCompat="@drawable/ic_status" />
+            app:srcCompat="@drawable/ic_status"
+            android:contentDescription="@string/status_icon" />
 
         <TextView
             android:id="@+id/edit_course_term_dropdown_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Select Term"
+            android:text="@string/select_term"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_end_date" />
 
@@ -233,7 +230,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/edit_course_term_dropdown"
             app:layout_constraintStart_toStartOf="@+id/edit_course_term_dropdown_label"
             app:layout_constraintTop_toTopOf="@+id/edit_course_term_dropdown"
-            app:srcCompat="@drawable/ic_term" />
+            app:srcCompat="@drawable/ic_term"
+            android:contentDescription="@string/term_icon" />
 
         <View
             android:id="@+id/edit_course_status_divider"
@@ -260,7 +258,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Do you want alerts for this course?"
+            android:text="@string/do_you_want_alerts_for_this_course"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_status_divider" />
 
@@ -269,7 +267,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Mentor Details"
+            android:text="@string/mentor_details"
             android:textSize="32sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_notifications_label" />
@@ -289,7 +287,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Assessment List"
+            android:text="@string/assessment_list"
             android:textSize="32sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_mentor_email" />
@@ -309,7 +307,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="No Assessments"
+            android:text="@string/no_assessments"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_assessments_list"
             android:visibility="gone"

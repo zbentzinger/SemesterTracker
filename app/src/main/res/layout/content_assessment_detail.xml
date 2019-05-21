@@ -2,17 +2,14 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".ui.AssessmentDetail"
-        tools:showIn="@layout/activity_assessment_detail"
-        android:padding="16dp">
+        android:layout_height="wrap_content">
 
         <EditText
             android:id="@+id/edit_assessment_name"
@@ -20,7 +17,7 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_assessment"
             android:drawablePadding="8dp"
-            android:inputType="textPersonName"
+            android:inputType="textPersonName|textCapWords"
             android:paddingStart="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +77,7 @@
             android:id="@+id/edit_assessment_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Assessment Details"
+            android:text="@string/assessment_details"
             android:textSize="32sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -100,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Assessment Name"
+            android:text="@string/assessment_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_assessment_header_divider" />
 
@@ -109,7 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Assessment Type"
+            android:text="@string/assessment_type"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_assessment_due_date" />
 
@@ -120,7 +117,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/edit_assessment_type"
             app:layout_constraintStart_toStartOf="@+id/edit_assessment_type_label"
             app:layout_constraintTop_toTopOf="@+id/edit_assessment_type"
-            app:srcCompat="@drawable/ic_assessment_type" />
+            app:srcCompat="@drawable/ic_assessment_type"
+            android:contentDescription="@string/assessment_type_icon" />
 
         <View
             android:id="@+id/edit_assessment_type_divider"
@@ -137,7 +135,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Due Date"
+            android:text="@string/due_date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_assessment_name" />
 
@@ -146,7 +144,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Select Course"
+            android:text="@string/select_course"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_assessment_type_divider" />
 
@@ -157,7 +155,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/edit_assessment_course_dropdown"
             app:layout_constraintStart_toStartOf="@+id/edit_assessment_course_dropdown_label"
             app:layout_constraintTop_toTopOf="@+id/edit_assessment_course_dropdown"
-            app:srcCompat="@drawable/ic_course" />
+            app:srcCompat="@drawable/ic_course"
+            android:contentDescription="@string/course_icon_2" />
 
         <View
             android:id="@+id/edit_assessment_select_course_divider"
@@ -174,7 +173,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Do you want alerts for this assessment?"
+            android:text="@string/do_you_want_alerts_for_this_assessment"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_assessment_select_course_divider" />
 
@@ -183,7 +182,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Note List"
+            android:text="@string/note_list"
             android:textSize="32sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_assessment_notifications_text" />
@@ -205,7 +204,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="No Notes"
+            android:text="@string/no_notes"
             android:textSize="20sp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"

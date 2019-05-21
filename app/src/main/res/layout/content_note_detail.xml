@@ -2,16 +2,14 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp" >
+        android:layout_height="wrap_content" >
 
         <EditText
             android:id="@+id/edit_note_name"
@@ -40,7 +38,7 @@
             android:layout_height="500dp"
             android:layout_marginTop="8dp"
             android:gravity="start|top"
-            android:inputType="textMultiLine|textCapSentences"
+            android:inputType="textAutoCorrect|textMultiLine|textCapSentences|textAutoComplete"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +48,7 @@
             android:id="@+id/edit_note_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Notes Detail"
+            android:text="@string/notes_detail"
             android:textSize="32sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -70,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Note Name"
+            android:text="@string/note_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_note_header_divider" />
 
@@ -79,7 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Select Course"
+            android:text="@string/select_course"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_note_name" />
 
@@ -90,7 +88,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/edit_note_course_dropdown"
             app:layout_constraintStart_toStartOf="@+id/edit_note_select_course_dropdown_label"
             app:layout_constraintTop_toTopOf="@+id/edit_note_course_dropdown"
-            app:srcCompat="@drawable/ic_course" />
+            app:srcCompat="@drawable/ic_course"
+            android:contentDescription="@string/course_icon" />
 
         <View
             android:id="@+id/edit_note_course_dropdown_divider"
@@ -107,7 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Body"
+            android:text="@string/body"
             android:textSize="32sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_note_course_dropdown_divider" />
