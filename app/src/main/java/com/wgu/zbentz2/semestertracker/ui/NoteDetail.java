@@ -1,7 +1,10 @@
 package com.wgu.zbentz2.semestertracker.ui;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -60,12 +63,34 @@ public class NoteDetail extends AppCompatActivity {
 
     }
 
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+
+        if (action.equals(Intent.ACTION_EDIT)) {
+
+            getMenuInflater().inflate(R.menu.share_and_delete_options_menu, menu);
+
+        }
+
+        return true;
+    }
+
     @Override public boolean onOptionsItemSelected(MenuItem item) {
 
-        // Save when the user uses the up button.
-        if (item.getItemId() == android.R.id.home) {
+        int id = item.getItemId();
 
-            finishEditing();
+        switch (id) {
+
+            case android.R.id.home:
+                finishEditing();
+                break;
+
+            case R.id.note_menu_delete:
+                deleteNote();
+                break;
+
+            case R.id.note_menu_share:
+                shareNote();
+                break;
 
         }
 
@@ -126,6 +151,7 @@ public class NoteDetail extends AppCompatActivity {
                     );
 
                     noteViewModel.insert(note);
+
                     break;
 
 
@@ -136,6 +162,13 @@ public class NoteDetail extends AppCompatActivity {
                     note.setNote_body(note_body);
 
                     noteViewModel.update(note);
+
+                    break;
+
+                case Intent.ACTION_DELETE:
+
+                    noteViewModel.delete(note);
+
                     break;
 
             }
@@ -173,5 +206,54 @@ public class NoteDetail extends AppCompatActivity {
                 }
             }
         );
+    }
+
+    private void shareNote() {
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+
+        intent.putExtra(
+            Intent.EXTRA_SUBJECT,
+            noteName.getText().toString()
+        );
+        intent.putExtra(
+            Intent.EXTRA_TEXT,
+            noteBody.getText().toString()
+        );
+
+        startActivity(Intent.createChooser(intent, "Share via"));
+
+    }
+
+    private void deleteNote() {
+
+        DialogInterface.OnClickListener dialogListener = new DialogInterface.OnClickListener() {
+            @Override public void onClick(DialogInterface dialog, int button) {
+
+                // Do nothing if they click NO
+                if (button == DialogInterface.BUTTON_POSITIVE) {
+
+                    action = Intent.ACTION_DELETE;
+                    finishEditing();
+
+                }
+
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage("Are you sure you want to delete this note?")
+            .setPositiveButton(
+                getString(android.R.string.yes),
+                dialogListener
+            )
+            .setNegativeButton(
+                getString(android.R.string.no),
+                dialogListener
+            )
+            .show();
+
     }
 }

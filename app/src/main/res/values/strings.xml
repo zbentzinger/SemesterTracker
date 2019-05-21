@@ -61,4 +61,6 @@
     <string name="do_you_want_alerts_for_this_assessment">Do you want alerts for this assessment?</string>
     <string name="note_list">Note List</string>
     <string name="no_notes">No Notes</string>
+    <string name="share">Share</string>
+    <string name="delete">Delete</string>
 </resources>
