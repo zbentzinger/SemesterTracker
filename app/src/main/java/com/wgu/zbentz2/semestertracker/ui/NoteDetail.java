@@ -84,11 +84,11 @@ public class NoteDetail extends AppCompatActivity {
                 finishEditing();
                 break;
 
-            case R.id.note_menu_delete:
+            case R.id.delete_and_sharing_menu_delete:
                 deleteNote();
                 break;
 
-            case R.id.note_menu_share:
+            case R.id.delete_and_sharing_menu_share:
                 shareNote();
                 break;
 
