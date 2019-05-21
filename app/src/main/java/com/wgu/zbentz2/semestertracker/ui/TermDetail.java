@@ -196,7 +196,7 @@ public class TermDetail extends AppCompatActivity {
                     // Rubric A3.
                     // So if the user wants to delete the term later on.
                     canDelete = courses.size() == 0;
-                    
+
                 }
             }
         );
