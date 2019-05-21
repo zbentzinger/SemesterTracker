@@ -256,13 +256,16 @@ public class TermDetail extends AppCompatActivity {
             term_start_date.length() > 0 &&
             term_end_date.length() > 0) {
 
+            String toastMessage = null;
+
             switch (action) {
 
                 case Intent.ACTION_INSERT:
 
                     term = new Term(term_name, term_start_date, term_end_date);
-
                     termViewModel.insert(term);
+
+                    toastMessage = term_name + " added successfully.";
 
                     break;
 
@@ -275,15 +278,27 @@ public class TermDetail extends AppCompatActivity {
 
                     termViewModel.update(term);
 
+                    toastMessage = term_name + " updated successfully.";
+
                     break;
 
                 case Intent.ACTION_DELETE:
 
                     termViewModel.delete(term);
 
+                    toastMessage = term_name + " deleted successfully.";
+
                     break;
 
             }
+
+            // Let the user know all is well.
+            Toast.makeText(
+                TermDetail.this,
+                toastMessage,
+                Toast.LENGTH_SHORT)
+            .show();
+
         }
 
         finish();
@@ -317,7 +332,7 @@ public class TermDetail extends AppCompatActivity {
                 getString(android.R.string.no),
                 dialogListener
             )
-            .show();
+        .show();
 
     }
 }

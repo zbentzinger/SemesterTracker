@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -140,6 +141,8 @@ public class NoteDetail extends AppCompatActivity {
             note_body.length() > 0 &&
             selectedCourse != null) {
 
+            String toastMessage = null;
+
             switch (action) {
 
                 case Intent.ACTION_INSERT:
@@ -152,6 +155,8 @@ public class NoteDetail extends AppCompatActivity {
 
                     noteViewModel.insert(note);
 
+                    toastMessage = note_name + " added successfully.";
+
                     break;
 
 
@@ -163,15 +168,26 @@ public class NoteDetail extends AppCompatActivity {
 
                     noteViewModel.update(note);
 
+                    toastMessage = note_name + " updated successfully.";
+
                     break;
 
                 case Intent.ACTION_DELETE:
 
                     noteViewModel.delete(note);
 
+                    toastMessage = note_name + " deleted successfully.";
+
                     break;
 
             }
+
+            // Let the user know all is well.
+            Toast.makeText(
+                NoteDetail.this,
+                toastMessage,
+                Toast.LENGTH_SHORT)
+            .show();
 
         }
 
@@ -253,7 +269,7 @@ public class NoteDetail extends AppCompatActivity {
                 getString(android.R.string.no),
                 dialogListener
             )
-            .show();
+        .show();
 
     }
 }

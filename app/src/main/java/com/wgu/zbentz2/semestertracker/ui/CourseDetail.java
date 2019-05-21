@@ -15,6 +15,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -289,6 +290,8 @@ public class CourseDetail extends AppCompatActivity {
             course_status.length() > 0 &&
             selectedTerm != null) {
 
+            String toastMessage = null;
+
             switch (action) {
 
                 case Intent.ACTION_INSERT:
@@ -307,6 +310,8 @@ public class CourseDetail extends AppCompatActivity {
 
                     courseViewModel.insert(course);
 
+                    toastMessage = course_name + " added successfully.";
+
                     break;
 
 
@@ -324,15 +329,26 @@ public class CourseDetail extends AppCompatActivity {
 
                     courseViewModel.update(course);
 
+                    toastMessage = course_name + " updated successfully.";
+
                     break;
 
                 case Intent.ACTION_DELETE:
 
                     courseViewModel.delete(course);
 
+                    toastMessage = course_name + " deleted successfully.";
+
                     break;
 
             }
+
+            // Let the user know all is well.
+            Toast.makeText(
+                CourseDetail.this,
+                toastMessage,
+                Toast.LENGTH_SHORT)
+            .show();
         }
 
         finish();
@@ -395,7 +411,7 @@ public class CourseDetail extends AppCompatActivity {
                 getString(android.R.string.no),
                 dialogListener
             )
-            .show();
+        .show();
 
     }
 }
