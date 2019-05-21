@@ -1,8 +1,12 @@
 package com.wgu.zbentz2.semestertracker.ui;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,12 +14,14 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.wgu.zbentz2.semestertracker.R;
 import com.wgu.zbentz2.semestertracker.database.entities.Course;
 import com.wgu.zbentz2.semestertracker.database.entities.Term;
@@ -42,6 +48,7 @@ public class TermDetail extends AppCompatActivity {
     private CourseViewModel courseViewModel;
     private Term term;
 
+    private boolean canDelete = false;
     private String action;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 
@@ -73,12 +80,48 @@ public class TermDetail extends AppCompatActivity {
 
     }
 
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+
+        if (action.equals(Intent.ACTION_EDIT)) {
+
+            getMenuInflater().inflate(R.menu.delete_only_options_menu, menu);
+
+        }
+
+        return true;
+
+    }
+
     @Override public boolean onOptionsItemSelected(MenuItem item) {
 
-        // Save when the user uses the up button.
-        if (item.getItemId() == android.R.id.home) {
+        int id = item.getItemId();
 
-            finishEditing();
+        switch (id) {
+
+            case android.R.id.home:
+
+                finishEditing();
+
+                break;
+
+            case R.id.delete_only_menu_delete:
+
+                if (canDelete) {
+
+                    deleteTerm();
+
+                } else {
+
+                    View contextView = findViewById(R.id.term_detail_coordinator_view);
+                    Snackbar.make(
+                        contextView,
+                        "You cannot delete a term that has associated courses.",
+                        Snackbar.LENGTH_LONG)
+                    .show();
+
+                }
+
+                break;
 
         }
 
@@ -150,6 +193,12 @@ public class TermDetail extends AppCompatActivity {
                     termCourseList.setAdapter(listAdapter);
                     listAdapter.notifyDataSetChanged();
 
+                    // Rubric A3.
+                    // So if the user wants to delete the term later on.
+                    canDelete = courses.size() == 0;
+
+                    Log.d("TermDetail", String.valueOf(canDelete));
+
                 }
             }
         );
@@ -216,6 +265,7 @@ public class TermDetail extends AppCompatActivity {
                     term = new Term(term_name, term_start_date, term_end_date);
 
                     termViewModel.insert(term);
+
                     break;
 
 
@@ -226,12 +276,50 @@ public class TermDetail extends AppCompatActivity {
                     term.setEnd_date(term_end_date);
 
                     termViewModel.update(term);
+                    
+                    break;
+
+                case Intent.ACTION_DELETE:
+
+                    termViewModel.delete(term);
+
                     break;
 
             }
         }
 
         finish();
+
+    }
+
+    private void deleteTerm() {
+
+        DialogInterface.OnClickListener dialogListener = new DialogInterface.OnClickListener() {
+            @Override public void onClick(DialogInterface dialog, int button) {
+
+                // Do nothing if they click NO
+                if (button == DialogInterface.BUTTON_POSITIVE) {
+
+                    action = Intent.ACTION_DELETE;
+                    finishEditing();
+
+                }
+
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage("Are you sure you want to delete this term?")
+            .setPositiveButton(
+                getString(android.R.string.yes),
+                dialogListener
+            )
+            .setNegativeButton(
+                getString(android.R.string.no),
+                dialogListener
+            )
+            .show();
 
     }
 }
