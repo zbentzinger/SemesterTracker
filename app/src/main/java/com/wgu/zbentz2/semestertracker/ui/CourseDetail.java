@@ -1,8 +1,11 @@
 package com.wgu.zbentz2.semestertracker.ui;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -94,12 +97,31 @@ public class CourseDetail extends AppCompatActivity {
 
     }
 
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+
+        if (action.equals(Intent.ACTION_EDIT)) {
+
+            getMenuInflater().inflate(R.menu.delete_only_options_menu, menu);
+
+        }
+
+        return true;
+
+    }
+
     @Override public boolean onOptionsItemSelected(MenuItem item) {
 
-        // Save when the user uses the up button.
-        if (item.getItemId() == android.R.id.home) {
+        int id = item.getItemId();
 
-            finishEditing();
+        switch (id) {
+
+            case android.R.id.home:
+                finishEditing();
+                break;
+
+            case R.id.delete_only_menu_delete:
+                deleteCourse();
+                break;
 
         }
 
@@ -284,6 +306,7 @@ public class CourseDetail extends AppCompatActivity {
                     );
 
                     courseViewModel.insert(course);
+
                     break;
 
 
@@ -300,6 +323,13 @@ public class CourseDetail extends AppCompatActivity {
                     course.setNotifications(course_notifications);
 
                     courseViewModel.update(course);
+
+                    break;
+
+                case Intent.ACTION_DELETE:
+
+                    courseViewModel.delete(course);
+
                     break;
 
             }
@@ -336,5 +366,36 @@ public class CourseDetail extends AppCompatActivity {
                 }
             }
         );
+    }
+
+    private void deleteCourse() {
+
+        DialogInterface.OnClickListener dialogListener = new DialogInterface.OnClickListener() {
+            @Override public void onClick(DialogInterface dialog, int button) {
+
+                // Do nothing if they click NO
+                if (button == DialogInterface.BUTTON_POSITIVE) {
+
+                    action = Intent.ACTION_DELETE;
+                    finishEditing();
+
+                }
+
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage("Are you sure you want to delete this course and its associated assessments and notes?")
+            .setPositiveButton(
+                getString(android.R.string.yes),
+                dialogListener
+            )
+            .setNegativeButton(
+                getString(android.R.string.no),
+                dialogListener
+            )
+            .show();
+
     }
 }

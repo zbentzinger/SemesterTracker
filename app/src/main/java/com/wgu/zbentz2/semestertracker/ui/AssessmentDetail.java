@@ -87,8 +87,7 @@ public class AssessmentDetail extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
 
         if (action.equals(Intent.ACTION_EDIT)) {
 
