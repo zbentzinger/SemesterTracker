@@ -1,7 +1,6 @@
 package com.wgu.zbentz2.semestertracker.ui;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -29,12 +27,11 @@ import com.wgu.zbentz2.semestertracker.database.entities.Note;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.AssessmentViewModel;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.CourseViewModel;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.NoteViewModel;
+import com.wgu.zbentz2.semestertracker.utils.UserInterfaceUtils;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 public class AssessmentDetail extends AppCompatActivity {
 
@@ -53,7 +50,6 @@ public class AssessmentDetail extends AppCompatActivity {
     private Course course;
 
     private String action;
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 
     @Override protected void onCreate(Bundle savedInstanceState) {
 
@@ -156,7 +152,9 @@ public class AssessmentDetail extends AppCompatActivity {
 
             try {
 
-                dueDateCal.setTime(dateFormat.parse(assessment.getDue_date()));
+                dueDateCal.setTime(
+                    UserInterfaceUtils.dateFormat.parse(assessment.getDue_date())
+                );
 
             } catch (ParseException e) {
 
@@ -177,7 +175,7 @@ public class AssessmentDetail extends AppCompatActivity {
 
         }
 
-        setupCalendar(assessmentDueDate, dueDateCal);
+        UserInterfaceUtils.setupCalendar(assessmentDueDate, dueDateCal, AssessmentDetail.this);
 
     }
 
@@ -211,36 +209,6 @@ public class AssessmentDetail extends AppCompatActivity {
                     intent.putExtra("Note", selectedNote);
                     startActivity(intent);
 
-                }
-            }
-        );
-    }
-
-    private void setupCalendar(final EditText field, final Calendar calendar) {
-
-        // Set the initial value.
-        field.setText(dateFormat.format(calendar.getTime()));
-
-        final DatePickerDialog.OnDateSetListener fieldDate = new DatePickerDialog.OnDateSetListener() {
-            @Override public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                calendar.set(Calendar.YEAR, year);
-                calendar.set(Calendar.MONTH, month);
-                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                // Update the field value on change.
-                field.setText(dateFormat.format(calendar.getTime()));
-            }
-        };
-
-        field.setOnClickListener(
-            new View.OnClickListener() {
-                @Override public void onClick(View v) {
-                    new DatePickerDialog(
-                        AssessmentDetail.this,
-                        fieldDate,
-                        calendar.get(Calendar.YEAR),
-                        calendar.get(Calendar.MONTH),
-                        calendar.get(Calendar.DAY_OF_MONTH)
-                    ).show();
                 }
             }
         );
