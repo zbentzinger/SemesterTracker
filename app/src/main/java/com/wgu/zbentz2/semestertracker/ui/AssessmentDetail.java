@@ -1,6 +1,5 @@
 package com.wgu.zbentz2.semestertracker.ui;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -150,17 +148,9 @@ public class AssessmentDetail extends AppCompatActivity {
 
             }
 
-            try {
-
-                dueDateCal.setTime(
-                    UserInterfaceUtils.dateFormat.parse(assessment.getDue_date())
-                );
-
-            } catch (ParseException e) {
-
-                e.printStackTrace();
-
-            }
+            dueDateCal.setTime(
+                UserInterfaceUtils.parseDateString(assessment.getDue_date())
+            );
 
 
             populateListView(assessment.getCourse_id());
@@ -273,12 +263,7 @@ public class AssessmentDetail extends AppCompatActivity {
 
             }
 
-            // Let the user know all is well.
-            Toast.makeText(
-                AssessmentDetail.this,
-                toastMessage,
-                Toast.LENGTH_SHORT)
-            .show();
+            UserInterfaceUtils.toastUser(this, toastMessage);
 
         }
 
@@ -331,18 +316,11 @@ public class AssessmentDetail extends AppCompatActivity {
             }
         };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setMessage("Are you sure you want to delete this assessment?")
-            .setPositiveButton(
-                getString(android.R.string.yes),
-                dialogListener
-            )
-            .setNegativeButton(
-                getString(android.R.string.no),
-                dialogListener
-            )
-        .show();
+        UserInterfaceUtils.alertUser(
+            this,
+            "Are you sure you want to delete this assessment?",
+            dialogListener
+        );
 
     }
 }

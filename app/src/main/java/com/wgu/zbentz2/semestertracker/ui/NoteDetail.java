@@ -1,6 +1,5 @@
 package com.wgu.zbentz2.semestertracker.ui;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -21,6 +19,7 @@ import com.wgu.zbentz2.semestertracker.database.entities.Course;
 import com.wgu.zbentz2.semestertracker.database.entities.Note;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.CourseViewModel;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.NoteViewModel;
+import com.wgu.zbentz2.semestertracker.utils.UserInterfaceUtils;
 
 import java.util.List;
 
@@ -182,12 +181,7 @@ public class NoteDetail extends AppCompatActivity {
 
             }
 
-            // Let the user know all is well.
-            Toast.makeText(
-                NoteDetail.this,
-                toastMessage,
-                Toast.LENGTH_SHORT)
-            .show();
+            UserInterfaceUtils.toastUser(this, toastMessage);
 
         }
 
@@ -258,18 +252,12 @@ public class NoteDetail extends AppCompatActivity {
             }
         };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setMessage("Are you sure you want to delete this note?")
-            .setPositiveButton(
-                getString(android.R.string.yes),
-                dialogListener
-            )
-            .setNegativeButton(
-                getString(android.R.string.no),
-                dialogListener
-            )
-        .show();
+        UserInterfaceUtils.alertUser(
+            this,
+            "Are you sure you want to delete this note?",
+            dialogListener
+        );
 
     }
+
 }

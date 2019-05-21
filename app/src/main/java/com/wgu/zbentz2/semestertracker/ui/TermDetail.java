@@ -1,6 +1,5 @@
 package com.wgu.zbentz2.semestertracker.ui;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,14 +10,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.wgu.zbentz2.semestertracker.R;
 import com.wgu.zbentz2.semestertracker.database.entities.Course;
 import com.wgu.zbentz2.semestertracker.database.entities.Term;
@@ -107,12 +104,10 @@ public class TermDetail extends AppCompatActivity {
 
                 } else {
 
-                    View contextView = findViewById(R.id.term_detail_coordinator_view);
-                    Snackbar.make(
-                        contextView,
-                        "You cannot delete a term that has associated courses.",
-                        Snackbar.LENGTH_LONG)
-                    .show();
+                    UserInterfaceUtils.snackbarUser(
+                        findViewById(R.id.term_detail_coordinator_view),
+                        "You cannot delete a term that has associated courses."
+                    );
 
                 }
 
@@ -143,20 +138,13 @@ public class TermDetail extends AppCompatActivity {
 
             termName.setText(term.getName());
 
-            try {
+            startCal.setTime(
+                UserInterfaceUtils.parseDateString(term.getStart_date())
+            );
 
-                startCal.setTime(
-                    UserInterfaceUtils.dateFormat.parse(term.getStart_date())
-                );
-                endCal.setTime(
-                    UserInterfaceUtils.dateFormat.parse(term.getEnd_date())
-                );
-
-            } catch (ParseException e) {
-
-                e.printStackTrace();
-
-            }
+            endCal.setTime(
+                UserInterfaceUtils.parseDateString(term.getEnd_date())
+            );
 
             populateCourseListView(term.getId());
 
@@ -261,12 +249,7 @@ public class TermDetail extends AppCompatActivity {
 
             }
 
-            // Let the user know all is well.
-            Toast.makeText(
-                TermDetail.this,
-                toastMessage,
-                Toast.LENGTH_SHORT)
-            .show();
+            UserInterfaceUtils.toastUser(this, toastMessage);
 
         }
 
@@ -290,18 +273,12 @@ public class TermDetail extends AppCompatActivity {
             }
         };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setMessage("Are you sure you want to delete this term?")
-            .setPositiveButton(
-                getString(android.R.string.yes),
-                dialogListener
-            )
-            .setNegativeButton(
-                getString(android.R.string.no),
-                dialogListener
-            )
-        .show();
+        UserInterfaceUtils.alertUser(
+            this,
+            "Are you sure you want to delete this term?",
+            dialogListener
+        );
 
     }
+
 }

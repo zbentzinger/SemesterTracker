@@ -1,18 +1,44 @@
 package com.wgu.zbentz2.semestertracker.utils;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class UserInterfaceUtils {
 
     public static final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
+
+    public static Date parseDateString(String dateString) {
+        // Just for handling this try/catch in a central place.
+
+        Date date = new Date();
+
+        try {
+
+            date = dateFormat.parse(dateString);
+
+        } catch (ParseException e) {
+
+            e.printStackTrace();
+
+        }
+
+        return date;
+
+    }
 
     public static void setupCalendar(final EditText field, final Calendar calendar, final Context context) {
 
@@ -42,6 +68,43 @@ public class UserInterfaceUtils {
                 }
             }
         );
+    }
+
+    public static void toastUser(Context context, String message) {
+
+        Toast.makeText(
+            context,
+            message,
+            Toast.LENGTH_SHORT)
+        .show();
+
+    }
+
+    public static void alertUser(Context context, String message, DialogInterface.OnClickListener dialogListener) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        builder.setMessage(message)
+            .setPositiveButton(
+                context.getString(android.R.string.yes),
+                dialogListener
+            )
+            .setNegativeButton(
+                context.getString(android.R.string.no),
+                dialogListener
+            )
+        .show();
+
+    }
+
+    public static void snackbarUser(View view, String message) {
+
+        Snackbar.make(
+            view,
+            message,
+            Snackbar.LENGTH_LONG)
+        .show();
+
     }
 
 }

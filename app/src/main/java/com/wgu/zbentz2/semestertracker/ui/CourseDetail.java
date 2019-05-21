@@ -1,6 +1,5 @@
 package com.wgu.zbentz2.semestertracker.ui;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -169,20 +167,13 @@ public class CourseDetail extends AppCompatActivity {
 
             }
 
-            try {
+            startCal.setTime(
+                UserInterfaceUtils.parseDateString(course.getStart_date())
+            );
 
-                startCal.setTime(
-                    UserInterfaceUtils.dateFormat.parse(course.getStart_date())
-                );
-                endCal.setTime(
-                    UserInterfaceUtils.dateFormat.parse(course.getEnd_date())
-                );
-
-            } catch (ParseException e) {
-
-                e.printStackTrace();
-
-            }
+            endCal.setTime(
+                UserInterfaceUtils.parseDateString(course.getEnd_date())
+            );
 
             populateListView(course.getId());
 
@@ -311,12 +302,7 @@ public class CourseDetail extends AppCompatActivity {
 
             }
 
-            // Let the user know all is well.
-            Toast.makeText(
-                CourseDetail.this,
-                toastMessage,
-                Toast.LENGTH_SHORT)
-            .show();
+            UserInterfaceUtils.toastUser(this, toastMessage);
         }
 
         finish();
@@ -368,18 +354,11 @@ public class CourseDetail extends AppCompatActivity {
             }
         };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setMessage("Are you sure you want to delete this course and its associated assessments and notes?")
-            .setPositiveButton(
-                getString(android.R.string.yes),
-                dialogListener
-            )
-            .setNegativeButton(
-                getString(android.R.string.no),
-                dialogListener
-            )
-        .show();
+        UserInterfaceUtils.alertUser(
+            this,
+            "Are you sure you want to delete this course and its associated assessments and notes?",
+            dialogListener
+        );
 
     }
 }
