@@ -25,6 +25,7 @@ import com.wgu.zbentz2.semestertracker.database.entities.Note;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.AssessmentViewModel;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.CourseViewModel;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.NoteViewModel;
+import com.wgu.zbentz2.semestertracker.utils.NotificationUtils;
 import com.wgu.zbentz2.semestertracker.utils.UserInterfaceUtils;
 
 import java.util.Calendar;
@@ -233,6 +234,8 @@ public class AssessmentDetail extends AppCompatActivity {
 
                     assessmentViewModel.insert(assessment);
 
+                    setAssessmentNotifications();
+
                     toastMessage = assessment_name + " added successfully.";
 
                     break;
@@ -247,6 +250,8 @@ public class AssessmentDetail extends AppCompatActivity {
                     assessment.setNotifications(assessment_notifications);
 
                     assessmentViewModel.update(assessment);
+
+                    setAssessmentNotifications();
 
                     toastMessage = assessment_name + " updated successfully.";
 
@@ -320,6 +325,36 @@ public class AssessmentDetail extends AppCompatActivity {
             "Are you sure you want to delete this assessment?",
             dialogListener
         );
+
+    }
+
+    private void setAssessmentNotifications() {
+
+        if (assessment.getNotifications() > 0) {
+
+            // Assessment Date Notifications
+            NotificationUtils.scheduleNotification(
+                this,
+                "Upcoming Assessment!",
+                assessment.getName() + " is scheduled for today!",
+                dueDateCal.getTimeInMillis()
+            );
+
+            NotificationUtils.scheduleNotification(
+                this,
+                "Upcoming Assessment!",
+                assessment.getName() + " is scheduled for tomorrow!",
+                dueDateCal.getTimeInMillis() - NotificationUtils.MILLISECONDS_IN_DAY
+            );
+
+            NotificationUtils.scheduleNotification(
+                this,
+                "Upcoming Assessment!",
+                assessment.getName() + " is scheduled for next week!",
+                dueDateCal.getTimeInMillis() - NotificationUtils.MILLISECONDS_IN_WEEK
+            );
+
+        }
 
     }
 }
