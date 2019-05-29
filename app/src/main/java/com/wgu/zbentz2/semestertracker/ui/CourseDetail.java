@@ -25,9 +25,9 @@ import com.wgu.zbentz2.semestertracker.database.entities.Term;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.AssessmentViewModel;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.CourseViewModel;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.TermViewModel;
+import com.wgu.zbentz2.semestertracker.utils.NotificationUtils;
 import com.wgu.zbentz2.semestertracker.utils.UserInterfaceUtils;
 
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.List;
 
@@ -269,6 +269,8 @@ public class CourseDetail extends AppCompatActivity {
 
                     courseViewModel.insert(course);
 
+                    setCourseNotifications();
+
                     toastMessage = course_name + " added successfully.";
 
                     break;
@@ -287,6 +289,8 @@ public class CourseDetail extends AppCompatActivity {
                     course.setNotifications(course_notifications);
 
                     courseViewModel.update(course);
+
+                    setCourseNotifications();
 
                     toastMessage = course_name + " updated successfully.";
 
@@ -359,6 +363,58 @@ public class CourseDetail extends AppCompatActivity {
             "Are you sure you want to delete this course and its associated assessments and notes?",
             dialogListener
         );
+
+    }
+
+    private void setCourseNotifications() {
+
+        if (course.getNotifications() > 0) {
+
+            // Course Start Date Notifications
+            NotificationUtils.scheduleNotification(
+                this,
+                "Upcoming Course!",
+                course.getName() + " starts today!",
+                startCal.getTimeInMillis()
+            );
+
+            NotificationUtils.scheduleNotification(
+                this,
+                "Upcoming Course!",
+                course.getName() + " starts tomorrow!",
+                startCal.getTimeInMillis() - NotificationUtils.MILLISECONDS_IN_DAY
+            );
+
+            NotificationUtils.scheduleNotification(
+                this,
+                "Upcoming Course!",
+                course.getName() + " starts next week!",
+                startCal.getTimeInMillis() - NotificationUtils.MILLISECONDS_IN_WEEK
+            );
+
+            // Course End Date Notifications
+            NotificationUtils.scheduleNotification(
+                this,
+                "Course Ending Soon!",
+                course.getName() + " ends today!",
+                endCal.getTimeInMillis()
+            );
+
+            NotificationUtils.scheduleNotification(
+                this,
+                "Course Ending Soon!",
+                course.getName() + " ends tomorrow!",
+                endCal.getTimeInMillis() - NotificationUtils.MILLISECONDS_IN_DAY
+            );
+
+            NotificationUtils.scheduleNotification(
+                this,
+                "Course Ending Soon!",
+                course.getName() + " ends next week!",
+                endCal.getTimeInMillis() - NotificationUtils.MILLISECONDS_IN_WEEK
+            );
+
+        }
 
     }
 }

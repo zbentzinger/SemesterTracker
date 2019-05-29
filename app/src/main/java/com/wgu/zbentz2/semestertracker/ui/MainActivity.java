@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
 import com.wgu.zbentz2.semestertracker.R;
+import com.wgu.zbentz2.semestertracker.utils.NotificationUtils;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -22,6 +23,9 @@ public class MainActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Notifications
+        NotificationUtils.createNotificationChannel(this);
 
         // Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);

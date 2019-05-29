@@ -63,4 +63,7 @@
     <string name="no_notes">No Notes</string>
     <string name="share">Share</string>
     <string name="delete">Delete</string>
+    <string name="channel_name">notification_channel_for_semester_tracker</string>
+    <string name="channel_id">com.wgu.zbentz2.semestertracker.notification_channel</string>
+    <string name="channel_description">handles_notifications_for_semester_tracker</string>
 </resources>

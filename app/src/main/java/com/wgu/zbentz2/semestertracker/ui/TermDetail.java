@@ -23,7 +23,6 @@ import com.wgu.zbentz2.semestertracker.database.viewmodels.CourseViewModel;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.TermViewModel;
 import com.wgu.zbentz2.semestertracker.utils.UserInterfaceUtils;
 
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.List;
 
