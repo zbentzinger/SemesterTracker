@@ -12,6 +12,9 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.wgu.zbentz2.semestertracker.R;
+import com.wgu.zbentz2.semestertracker.ui.MainActivity;
+
+import java.util.Random;
 
 public class NotificationUtils {
 
@@ -19,7 +22,6 @@ public class NotificationUtils {
     public final static long MILLISECONDS_IN_WEEK = MILLISECONDS_IN_DAY * 7;
 
     static int notificationID;
-    static int requestCode;
 
     public static void createNotificationChannel(Context context) {
 
@@ -50,7 +52,7 @@ public class NotificationUtils {
         intent.putExtra("NotificationTitle", title);
         intent.putExtra("NotificationContent", content);
 
-        PendingIntent sender = PendingIntent.getBroadcast(context, requestCode++, intent, 0);
+        PendingIntent sender = PendingIntent.getBroadcast(context, generateRequestCode(), intent, 0);
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerDate, sender);
@@ -63,16 +65,41 @@ public class NotificationUtils {
         String title = intent.getExtras().getString("NotificationTitle");
         String content = intent.getExtras().getString("NotificationContent");
 
+        Intent mainActivity = new Intent(context, MainActivity.class);
+
+        // Load a specific fragment in the app.
+        if (title.contains("Assessment")) {
+
+            mainActivity.putExtra("fragmentID", R.id.nav_assessments);
+
+        } else {
+
+            mainActivity.putExtra("fragmentID", R.id.nav_courses);
+
+        }
+
+        PendingIntent pIntent = PendingIntent.getActivity(context, generateRequestCode(), mainActivity, 0);
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channel)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(title)
             .setContentText(content)
+            .setContentIntent(pIntent) // Start the app.
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setAutoCancel(true);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
 
         notificationManager.notify(notificationID++, builder.build());
+
+    }
+
+    public static int generateRequestCode() {
+        // This is probably a bad idea due to the 2038 problem...
+
+        Random rand = new Random(System.currentTimeMillis());
+
+        return rand.nextInt();
 
     }
 

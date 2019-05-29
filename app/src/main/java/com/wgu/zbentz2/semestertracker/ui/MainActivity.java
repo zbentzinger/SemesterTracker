@@ -19,6 +19,9 @@ import com.wgu.zbentz2.semestertracker.utils.NotificationUtils;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private NavigationView navigationView;
+    private DrawerLayout drawer;
+
     @Override protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -32,8 +35,8 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         // Nav
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
             this,
             drawer,
@@ -46,9 +49,9 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         // Fragments
-        loadFragment(R.id.nav_terms);
-
-        navigationView.getMenu().getItem(0).setChecked(true);
+        loadFragment(
+            getIntent().getIntExtra("fragmentID", R.id.nav_terms) // Notifications can populate this, else load the default terms fragment.
+        );
 
     }
 
@@ -81,21 +84,25 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_terms:
 
                 fragment = new TermsList();
+                navigationView.getMenu().getItem(0).setChecked(true);
                 break;
 
             case R.id.nav_courses:
 
                 fragment = new CoursesList();
+                navigationView.getMenu().getItem(1).setChecked(true);
                 break;
 
             case R.id.nav_assessments:
 
                 fragment = new AssessmentsList();
+                navigationView.getMenu().getItem(2).setChecked(true);
                 break;
 
             case R.id.nav_notes:
 
                 fragment = new NotesList();
+                navigationView.getMenu().getItem(3).setChecked(true);
                 break;
 
         }
@@ -108,7 +115,7 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
     }
