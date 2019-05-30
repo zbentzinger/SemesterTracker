@@ -133,12 +133,13 @@ public class NoteDetail extends AppCompatActivity {
 
         String note_name = noteName.getText().toString();
         String note_body = noteBody.getText().toString();
-
         Course selectedCourse = (Course) coursesDropdown.getSelectedItem();
 
-        if (note_name.length() > 0 &&
-            note_body.length() > 0 &&
-            selectedCourse != null) {
+        boolean valid_name = note_name.length() > 0;
+        boolean valid_body = note_body.length() > 0;
+        boolean valid_course = selectedCourse != null;
+
+        if (valid_name && valid_body && valid_course) {
 
             String toastMessage = null;
 
@@ -161,13 +162,21 @@ public class NoteDetail extends AppCompatActivity {
 
                 case Intent.ACTION_EDIT:
 
-                    note.setCourse_id(selectedCourse.getId());
-                    note.setNote_name(note_name);
-                    note.setNote_body(note_body);
+                    boolean course_changed = note.getCourse_id() != selectedCourse.getId();
+                    boolean name_changed = !note.getNote_name().equals(note_name);
+                    boolean body_changed = !note.getNote_body().equals(note_body);
 
-                    noteViewModel.update(note);
+                    if (course_changed || name_changed || body_changed) {
 
-                    toastMessage = note_name + " updated successfully.";
+                        note.setCourse_id(selectedCourse.getId());
+                        note.setNote_name(note_name);
+                        note.setNote_body(note_body);
+
+                        noteViewModel.update(note);
+
+                        toastMessage = note_name + " updated successfully.";
+
+                    }
 
                     break;
 
