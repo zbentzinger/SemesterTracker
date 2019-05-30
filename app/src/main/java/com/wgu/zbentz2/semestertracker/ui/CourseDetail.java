@@ -237,17 +237,18 @@ public class CourseDetail extends AppCompatActivity {
         String course_mentor_phone  = courseMentorPhone.getText().toString();
         String course_mentor_email = courseMentorEmail.getText().toString();
         String course_status = courseStatus.getSelectedItem().toString();
-
         Term selectedTerm = (Term) termsDropdown.getSelectedItem();
 
-        if (course_name.length() > 0 &&
-            course_start_date.length() > 0 &&
-            course_end_date.length() > 0 &&
-            course_mentor_name.length() > 0 &&
-            course_mentor_phone.length() > 0 &&
-            course_mentor_email.length() > 0 &&
-            course_status.length() > 0 &&
-            selectedTerm != null) {
+        boolean valid_name = course_name.length() > 0;
+        boolean valid_start = course_start_date.length() > 0;
+        boolean valid_end = course_end_date.length() > 0;
+        boolean valid_mentor = course_mentor_name.length() > 0;
+        boolean valid_phone = course_mentor_phone.length() > 0;
+        boolean valid_email = course_mentor_email.length() > 0;
+        boolean valid_status = course_status.length() > 0;
+        boolean valid_term = selectedTerm != null;
+
+        if (valid_name && valid_start && valid_end && valid_mentor && valid_phone && valid_email && valid_status && valid_term) {
 
             String toastMessage = null;
 
@@ -278,21 +279,41 @@ public class CourseDetail extends AppCompatActivity {
 
                 case Intent.ACTION_EDIT:
 
-                    course.setTerm_id(selectedTerm.getId());
-                    course.setName(course_name);
-                    course.setStart_date(course_start_date);
-                    course.setEnd_date(course_end_date);
-                    course.setMentor_name(course_mentor_name);
-                    course.setMentor_phone(course_mentor_phone);
-                    course.setMentor_email(course_mentor_email);
-                    course.setStatus(course_status);
-                    course.setNotifications(course_notifications);
+                    boolean term_changed = course.getTerm_id() != selectedTerm.getId();
+                    boolean name_changed = !course.getName().equals(course_name);
+                    boolean start_changed = !course.getStart_date().equals(course_start_date);
+                    boolean end_changed = !course.getEnd_date().equals(course_end_date);
+                    boolean mentor_changed = !course.getMentor_name().equals(course_mentor_name);
+                    boolean phone_changed = !course.getMentor_phone().equals(course_mentor_phone);
+                    boolean email_changed = !course.getMentor_email().equals(course_mentor_email);
+                    boolean status_changed = !course.getStatus().equals(course_status);
+                    boolean alert_changed = course.getNotifications() != course_notifications;
 
-                    courseViewModel.update(course);
+                    // Prevent unnecessary database call.
+                    if (term_changed || name_changed || start_changed || end_changed || mentor_changed || phone_changed || email_changed || status_changed || alert_changed) {
 
-                    setCourseNotifications();
+                        course.setTerm_id(selectedTerm.getId());
+                        course.setName(course_name);
+                        course.setStart_date(course_start_date);
+                        course.setEnd_date(course_end_date);
+                        course.setMentor_name(course_mentor_name);
+                        course.setMentor_phone(course_mentor_phone);
+                        course.setMentor_email(course_mentor_email);
+                        course.setStatus(course_status);
 
-                    toastMessage = course_name + " updated successfully.";
+                        // Prevent duplicate notifications.
+                        if (alert_changed) {
+
+                            course.setNotifications(course_notifications);
+                            setCourseNotifications();
+
+                        }
+
+                        courseViewModel.update(course);
+
+                        toastMessage = course_name + " updated successfully.";
+
+                    }
 
                     break;
 
