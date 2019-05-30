@@ -21,6 +21,7 @@ import com.wgu.zbentz2.semestertracker.database.viewmodels.TermViewModel;
 import com.wgu.zbentz2.semestertracker.utils.adapters.TermRecyclerViewAdapter;
 import com.wgu.zbentz2.semestertracker.utils.listeners.TermClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -57,7 +58,8 @@ public class TermsList extends Fragment {
             this,
             new Observer<List<Term>>() {
                 @Override public void onChanged(final List<Term> terms) {
-                    adapter.setTerms(terms);
+                    // Per requirement C.1.a.
+                    adapter.setTerms((ArrayList<Term>) terms);
                 }
             }
         );

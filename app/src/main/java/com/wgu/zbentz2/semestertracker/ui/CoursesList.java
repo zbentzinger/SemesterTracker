@@ -21,6 +21,8 @@ import com.wgu.zbentz2.semestertracker.database.viewmodels.CourseViewModel;
 import com.wgu.zbentz2.semestertracker.utils.adapters.CourseRecyclerViewAdapter;
 import com.wgu.zbentz2.semestertracker.utils.listeners.CourseClickListener;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -58,7 +60,8 @@ public class CoursesList extends Fragment {
             this,
             new Observer<List<Course>>() {
                 @Override public void onChanged(final List<Course> courses) {
-                    adapter.setCourses(courses);
+                    // Per requirement C.1.a.
+                    adapter.setCourses((ArrayList<Course>) courses);
                 }
             }
         );

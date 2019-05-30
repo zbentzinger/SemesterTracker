@@ -13,13 +13,13 @@ import com.wgu.zbentz2.semestertracker.R;
 import com.wgu.zbentz2.semestertracker.database.entities.Assessment;
 import com.wgu.zbentz2.semestertracker.utils.listeners.AssessmentClickListener;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class AssessmentRecyclerViewAdapter extends RecyclerView.Adapter<AssessmentRecyclerViewAdapter.AssessmentViewHolder> {
 
     private AssessmentClickListener adapterListener;
     private final LayoutInflater layoutInflater;
-    private List<Assessment> assessments;
+    private ArrayList<Assessment> assessments; // Per requirement C.1.a.
 
     public AssessmentRecyclerViewAdapter(Context context, AssessmentClickListener assessmentClickListener) {
 
@@ -102,7 +102,8 @@ public class AssessmentRecyclerViewAdapter extends RecyclerView.Adapter<Assessme
 
     }
 
-    public void setAssessments(List<Assessment> assessments) {
+    // Per requirement C.1.a.
+    public void setAssessments(ArrayList<Assessment> assessments) {
 
         this.assessments = assessments;
         notifyDataSetChanged();

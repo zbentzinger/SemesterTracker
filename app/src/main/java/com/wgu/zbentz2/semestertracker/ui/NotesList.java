@@ -21,6 +21,7 @@ import com.wgu.zbentz2.semestertracker.database.viewmodels.NoteViewModel;
 import com.wgu.zbentz2.semestertracker.utils.adapters.NoteRecyclerViewAdapter;
 import com.wgu.zbentz2.semestertracker.utils.listeners.NoteClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -57,7 +58,8 @@ public class NotesList extends Fragment {
             this,
             new Observer<List<Note>>() {
                 @Override public void onChanged(final List<Note> notes) {
-                    adapter.setNotes(notes);
+                    // Per requirement C.1.a.
+                    adapter.setNotes((ArrayList<Note>) notes);
                 }
             }
         );

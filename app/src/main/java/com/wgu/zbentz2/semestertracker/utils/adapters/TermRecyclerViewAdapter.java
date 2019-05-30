@@ -13,13 +13,14 @@ import com.wgu.zbentz2.semestertracker.R;
 import com.wgu.zbentz2.semestertracker.database.entities.Term;
 import com.wgu.zbentz2.semestertracker.utils.listeners.TermClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TermRecyclerViewAdapter extends RecyclerView.Adapter<TermRecyclerViewAdapter.TermViewHolder> {
 
     private TermClickListener adapterListener;
     private final LayoutInflater inflater;
-    private List<Term> terms;
+    private ArrayList<Term> terms; // Per requirement C.1.a.
 
     public TermRecyclerViewAdapter(Context context, TermClickListener listener) {
 
@@ -99,7 +100,8 @@ public class TermRecyclerViewAdapter extends RecyclerView.Adapter<TermRecyclerVi
 
     }
 
-    public void setTerms(List<Term> terms) {
+    // Per requirement C.1.a.
+    public void setTerms(ArrayList<Term> terms) {
 
         this.terms = terms;
         notifyDataSetChanged();

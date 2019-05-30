@@ -13,13 +13,14 @@ import com.wgu.zbentz2.semestertracker.R;
 import com.wgu.zbentz2.semestertracker.database.entities.Course;
 import com.wgu.zbentz2.semestertracker.utils.listeners.CourseClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CourseRecyclerViewAdapter extends RecyclerView.Adapter<CourseRecyclerViewAdapter.CourseViewHolder> {
 
     private CourseClickListener adapterListener;
     private final LayoutInflater layoutInflater;
-    private List<Course> courses;
+    private ArrayList<Course> courses; // Per requirement C.1.a.
 
     public CourseRecyclerViewAdapter(Context context, CourseClickListener courseClickListener) {
 
@@ -102,7 +103,8 @@ public class CourseRecyclerViewAdapter extends RecyclerView.Adapter<CourseRecycl
 
     }
 
-    public void setCourses(List<Course> courses) {
+    // Per requirement C.1.a.
+    public void setCourses(ArrayList<Course> courses) {
 
         this.courses = courses;
         notifyDataSetChanged();

@@ -13,13 +13,14 @@ import com.wgu.zbentz2.semestertracker.R;
 import com.wgu.zbentz2.semestertracker.database.entities.Note;
 import com.wgu.zbentz2.semestertracker.utils.listeners.NoteClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerViewAdapter.NoteViewHolder> {
 
     private NoteClickListener adapterListener;
     private final LayoutInflater inflater;
-    private List<Note> notes;
+    private ArrayList<Note> notes; // Per requirement C.1.a.
 
     public NoteRecyclerViewAdapter(Context context, NoteClickListener listener) {
 
@@ -96,7 +97,8 @@ public class NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerVi
 
     }
 
-    public void setNotes(List<Note> notes) {
+    // Per requirement C.1.a.
+    public void setNotes(ArrayList<Note> notes) {
 
         this.notes = notes;
         notifyDataSetChanged();

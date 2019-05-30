@@ -21,6 +21,7 @@ import com.wgu.zbentz2.semestertracker.database.viewmodels.AssessmentViewModel;
 import com.wgu.zbentz2.semestertracker.utils.adapters.AssessmentRecyclerViewAdapter;
 import com.wgu.zbentz2.semestertracker.utils.listeners.AssessmentClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -58,7 +59,8 @@ public class AssessmentsList extends Fragment {
             this,
             new Observer<List<Assessment>>() {
                 @Override public void onChanged(final List<Assessment> assessments) {
-                    adapter.setAssessments(assessments);
+                    // Per requirement C.1.a.
+                    adapter.setAssessments((ArrayList<Assessment>) assessments);
                 }
             }
         );
