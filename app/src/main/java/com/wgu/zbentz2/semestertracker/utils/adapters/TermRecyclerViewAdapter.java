@@ -14,7 +14,6 @@ import com.wgu.zbentz2.semestertracker.database.entities.Term;
 import com.wgu.zbentz2.semestertracker.utils.listeners.TermClickListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TermRecyclerViewAdapter extends RecyclerView.Adapter<TermRecyclerViewAdapter.TermViewHolder> {
 

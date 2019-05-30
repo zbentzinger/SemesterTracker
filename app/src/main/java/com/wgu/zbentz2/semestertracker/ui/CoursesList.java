@@ -21,7 +21,6 @@ import com.wgu.zbentz2.semestertracker.database.viewmodels.CourseViewModel;
 import com.wgu.zbentz2.semestertracker.utils.adapters.CourseRecyclerViewAdapter;
 import com.wgu.zbentz2.semestertracker.utils.listeners.CourseClickListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 

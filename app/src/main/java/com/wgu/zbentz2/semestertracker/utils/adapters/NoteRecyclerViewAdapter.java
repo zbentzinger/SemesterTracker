@@ -14,7 +14,6 @@ import com.wgu.zbentz2.semestertracker.database.entities.Note;
 import com.wgu.zbentz2.semestertracker.utils.listeners.NoteClickListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerViewAdapter.NoteViewHolder> {
 

@@ -14,7 +14,6 @@ import com.wgu.zbentz2.semestertracker.database.entities.Course;
 import com.wgu.zbentz2.semestertracker.utils.listeners.CourseClickListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CourseRecyclerViewAdapter extends RecyclerView.Adapter<CourseRecyclerViewAdapter.CourseViewHolder> {
 

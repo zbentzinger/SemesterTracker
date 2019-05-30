@@ -210,13 +210,14 @@ public class AssessmentDetail extends AppCompatActivity {
         String assessment_name = assessmentName.getText().toString();
         String assessment_type = assessmentType.getSelectedItem().toString();
         String assessment_due_date = assessmentDueDate.getText().toString();
-
         Course selectedCourse = (Course) coursesDropdown.getSelectedItem();
 
-        if (assessment_name.length() > 0 &&
-            assessment_type.length() > 0 &&
-            assessment_due_date.length() > 0 &&
-            selectedCourse != null) {
+        boolean valid_name = assessment_name.length() > 0;
+        boolean valid_type = assessment_type.length() > 0;
+        boolean valid_date = assessment_due_date.length() > 0;
+        boolean valid_course = selectedCourse != null;
+
+        if (valid_name && valid_type && valid_date && valid_course) {
 
             String toastMessage = null;
 
@@ -243,17 +244,33 @@ public class AssessmentDetail extends AppCompatActivity {
 
                 case Intent.ACTION_EDIT:
 
-                    assessment.setCourse_id(selectedCourse.getId());
-                    assessment.setName(assessment_name);
-                    assessment.setType(assessment_type);
-                    assessment.setDue_date(assessment_due_date);
-                    assessment.setNotifications(assessment_notifications);
+                    boolean course_changed = assessment.getCourse_id() != selectedCourse.getId();
+                    boolean name_changed = !assessment.getName().equals(assessment_name);
+                    boolean type_changed = !assessment.getType().equals(assessment_type);
+                    boolean date_changed = !assessment.getDue_date().equals(assessment_due_date);
+                    boolean alert_changed = assessment.getNotifications() != assessment_notifications;
 
-                    assessmentViewModel.update(assessment);
+                    // Prevent unnecessary database call if nothing changed.
+                    if (course_changed || name_changed || type_changed || date_changed || alert_changed) {
 
-                    setAssessmentNotifications();
+                        assessment.setCourse_id(selectedCourse.getId());
+                        assessment.setName(assessment_name);
+                        assessment.setType(assessment_type);
+                        assessment.setDue_date(assessment_due_date);
 
-                    toastMessage = assessment_name + " updated successfully.";
+                        // Prevent duplicate notifications
+                        if (alert_changed) {
+
+                            assessment.setNotifications(assessment_notifications);
+                            setAssessmentNotifications();
+
+                        }
+
+                        assessmentViewModel.update(assessment);
+
+                        toastMessage = assessment_name + " updated successfully.";
+
+                    }
 
                     break;
 

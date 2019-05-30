@@ -72,11 +72,16 @@ public class UserInterfaceUtils {
 
     public static void toastUser(Context context, String message) {
 
-        Toast.makeText(
-            context,
-            message,
-            Toast.LENGTH_SHORT)
-        .show();
+        // Don't show toast if the message is null.
+        if (message != null) {
+
+            Toast.makeText(
+                context,
+                message,
+                Toast.LENGTH_SHORT)
+            .show();
+
+        }
 
     }
 
