@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -109,6 +111,12 @@ public class UserInterfaceUtils {
             message,
             Snackbar.LENGTH_LONG)
         .show();
+
+    }
+
+    public static int dpToPixel(int dp) {
+
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, Resources.getSystem().getDisplayMetrics());
 
     }
 

@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -18,6 +20,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.wgu.zbentz2.semestertracker.R;
 import com.wgu.zbentz2.semestertracker.database.entities.Term;
 import com.wgu.zbentz2.semestertracker.database.viewmodels.TermViewModel;
+import com.wgu.zbentz2.semestertracker.utils.UserInterfaceUtils;
 import com.wgu.zbentz2.semestertracker.utils.adapters.TermRecyclerViewAdapter;
 import com.wgu.zbentz2.semestertracker.utils.listeners.TermClickListener;
 
@@ -26,6 +29,8 @@ import java.util.List;
 
 
 public class TermsList extends Fragment {
+
+    private ConstraintLayout constraintLayout;
 
     private TermViewModel termViewModel;
 
@@ -40,6 +45,8 @@ public class TermsList extends Fragment {
             container,
             false
         );
+
+        constraintLayout = terms_view.findViewById(R.id.terms_fragment);
 
         RecyclerView recyclerView = terms_view.findViewById(R.id.terms_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -74,17 +81,53 @@ public class TermsList extends Fragment {
 
         getActivity().setTitle("Terms");
 
-        FloatingActionButton fab = getView().findViewById(R.id.terms_fab);
+        // Per Requirement C.1.k. Programmatic method for creating user interface.
+        // Creating a FAB programmatically.
+        if (constraintLayout != null) {
 
-        fab.setOnClickListener(
-            new View.OnClickListener() {
-                @Override public void onClick(View view) {
-                    startActivity(
-                        new Intent(getActivity(), TermDetail.class)
-                    );
+            ConstraintLayout.LayoutParams lp = new ConstraintLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            );
+
+            FloatingActionButton fab = new FloatingActionButton(getContext());
+            fab.setId(View.generateViewId());
+            fab.setLayoutParams(lp);
+            fab.setClickable(true);
+            fab.setImageResource(R.drawable.ic_add);
+            fab.setFocusable(true);
+            fab.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override public void onClick(View view) {
+                        startActivity(
+                            new Intent(getActivity(), TermDetail.class)
+                        );
+                    }
                 }
-            }
-        );
+            );
+
+            constraintLayout.addView(fab);
+
+            ConstraintSet constraintSet = new ConstraintSet();
+            constraintSet.clone(constraintLayout);
+            constraintSet.connect(
+                fab.getId(),
+                ConstraintSet.BOTTOM,
+                ConstraintSet.PARENT_ID,
+                ConstraintSet.BOTTOM,
+                UserInterfaceUtils.dpToPixel(16)
+            );
+            constraintSet.connect(
+                fab.getId(),
+                ConstraintSet.END,
+                ConstraintSet.PARENT_ID,
+                ConstraintSet.END,
+                UserInterfaceUtils.dpToPixel(16)
+            );
+            constraintSet.applyTo(constraintLayout);
+
+        }
+
     }
 
     private TermClickListener addTermClickListener() {
