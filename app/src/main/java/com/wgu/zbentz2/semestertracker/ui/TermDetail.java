@@ -208,9 +208,11 @@ public class TermDetail extends AppCompatActivity {
         String term_start_date  = termStartDate.getText().toString();
         String term_end_date = termEndDate.getText().toString();
 
-        if (term_name.length() > 0 &&
-            term_start_date.length() > 0 &&
-            term_end_date.length() > 0) {
+        boolean valid_name = term_name.length() > 0;
+        boolean valid_start = term_start_date.length() > 0;
+        boolean valid_end = term_end_date.length() > 0;
+
+        if (valid_name && valid_start && valid_end) {
 
             String toastMessage = null;
 
@@ -228,13 +230,21 @@ public class TermDetail extends AppCompatActivity {
 
                 case Intent.ACTION_EDIT:
 
-                    term.setName(term_name);
-                    term.setStart_date(term_start_date);
-                    term.setEnd_date(term_end_date);
+                    boolean name_changed = !term.getName().equals(term_name);
+                    boolean start_changed = !term.getStart_date().equals(term_start_date);
+                    boolean end_changed = !term.getEnd_date().equals(term_end_date);
 
-                    termViewModel.update(term);
+                    if (name_changed || start_changed || end_changed) {
 
-                    toastMessage = term_name + " updated successfully.";
+                        term.setName(term_name);
+                        term.setStart_date(term_start_date);
+                        term.setEnd_date(term_end_date);
+
+                        termViewModel.update(term);
+
+                        toastMessage = term_name + " updated successfully.";
+
+                    }
 
                     break;
 
