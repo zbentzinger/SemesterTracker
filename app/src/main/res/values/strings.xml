@@ -8,7 +8,6 @@
     <string name="title_activity_term_detail">TermDetail</string>
     <string name="title_activity_course_detail">CourseDetail</string>
     <string name="title_activity_assessment_detail">AssessmentDetail</string>
-    <string name="term_active_checkbox">Active</string>
 
     <string-array name="course_statuses">
         <item>In Progress</item>
@@ -23,7 +22,6 @@
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_note_detail">NoteDetail</string>
     <string name="notes">Notes</string>
     <string name="term_details">Term Details</string>
@@ -66,9 +64,5 @@
     <string name="channel_name">notification_channel_for_semester_tracker</string>
     <string name="channel_id">com.wgu.zbentz2.semestertracker.notification_channel</string>
     <string name="channel_description">handles_notifications_for_semester_tracker</string>
-    <string name="no_terms_found">No Terms Found</string>
-    <string name="no_notes_found">No Notes Found</string>
-    <string name="no_courses_found">No Courses Found</string>
-    <string name="no_assessments_found">No Assessments Found</string>
     <string name="no_terms">No Terms</string>
 </resources>
