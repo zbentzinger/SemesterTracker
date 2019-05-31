@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -31,6 +32,7 @@ import java.util.List;
 public class TermsList extends Fragment {
 
     private ConstraintLayout constraintLayout;
+    private TextView emptyMessage;
 
     private TermViewModel termViewModel;
 
@@ -47,6 +49,7 @@ public class TermsList extends Fragment {
         );
 
         constraintLayout = terms_view.findViewById(R.id.terms_fragment);
+        emptyMessage = terms_view.findViewById(R.id.terms_list_no_terms);
 
         RecyclerView recyclerView = terms_view.findViewById(R.id.terms_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -67,6 +70,17 @@ public class TermsList extends Fragment {
                 @Override public void onChanged(final List<Term> terms) {
                     // Per requirement C.1.a.
                     adapter.setTerms((ArrayList<Term>) terms);
+
+                    // Show a message if there are no items in the adapter.
+                    if (adapter.getItemCount() == 0 ) {
+
+                        emptyMessage.setVisibility(View.VISIBLE);
+
+                    } else {
+
+                        emptyMessage.setVisibility(View.GONE);
+
+                    }
                 }
             }
         );

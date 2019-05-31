@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -27,6 +28,8 @@ import java.util.List;
 
 public class CoursesList extends Fragment {
 
+    private TextView emptyMessage;
+
     private CourseViewModel courseViewModel;
 
     public CoursesList() {}
@@ -41,6 +44,8 @@ public class CoursesList extends Fragment {
             container,
             false
         );
+
+        emptyMessage = courses_view.findViewById(R.id.course_list_empty_text);
 
         RecyclerView recyclerView = courses_view.findViewById(R.id.courses_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -61,6 +66,17 @@ public class CoursesList extends Fragment {
                 @Override public void onChanged(final List<Course> courses) {
                     // Per requirement C.1.a.
                     adapter.setCourses((ArrayList<Course>) courses);
+
+                    // Show a message if there are no items in the adapter.
+                    if (adapter.getItemCount() == 0 ) {
+
+                        emptyMessage.setVisibility(View.VISIBLE);
+
+                    } else {
+
+                        emptyMessage.setVisibility(View.GONE);
+
+                    }
                 }
             }
         );

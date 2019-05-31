@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -27,6 +28,8 @@ import java.util.List;
 
 public class NotesList extends Fragment {
 
+    private TextView emptyMessage;
+
     private NoteViewModel noteViewModel;
 
     public NotesList() {}
@@ -35,13 +38,15 @@ public class NotesList extends Fragment {
                                        ViewGroup container,
                                        Bundle savedInstanceState) {
 
-        View terms_view = inflater.inflate(
+        View notes_view = inflater.inflate(
             R.layout.fragment_notes_list,
             container,
             false
         );
 
-        RecyclerView recyclerView = terms_view.findViewById(R.id.notes_recycler_view);
+        emptyMessage = notes_view.findViewById(R.id.notes_list_empty_text);
+
+        RecyclerView recyclerView = notes_view.findViewById(R.id.notes_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         final NoteRecyclerViewAdapter adapter = new NoteRecyclerViewAdapter(
@@ -60,11 +65,22 @@ public class NotesList extends Fragment {
                 @Override public void onChanged(final List<Note> notes) {
                     // Per requirement C.1.a.
                     adapter.setNotes((ArrayList<Note>) notes);
+
+                    // Show a message if there are no items in the adapter.
+                    if (adapter.getItemCount() == 0 ) {
+
+                        emptyMessage.setVisibility(View.VISIBLE);
+
+                    } else {
+
+                        emptyMessage.setVisibility(View.GONE);
+
+                    }
                 }
             }
         );
 
-        return terms_view;
+        return notes_view;
 
     }
 
