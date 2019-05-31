@@ -105,6 +105,7 @@ public class TermsList extends Fragment {
                     }
                 }
             );
+            fab.setImageTintList(getContext().getColorStateList(R.color.textColorAccent));
 
             constraintLayout.addView(fab);
 

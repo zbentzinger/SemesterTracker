@@ -15,8 +15,10 @@
             android:id="@+id/edit_note_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
             android:drawableStart="@drawable/ic_note"
             android:drawablePadding="8dp"
+            android:drawableTint="@color/colorPrimary"
             android:inputType="textPersonName|textCapSentences"
             android:paddingStart="0dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -28,6 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:backgroundTint="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/edit_note_course_icon"
             app:layout_constraintTop_toBottomOf="@+id/edit_note_select_course_dropdown_label" />
@@ -49,6 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/notes_detail"
+            android:textColor="@color/textColorPrimary"
             android:textSize="32sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -59,6 +63,7 @@
             android:layout_height="2dp"
             android:layout_marginTop="8dp"
             android:background="@android:color/black"
+            android:backgroundTint="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_note_header" />
@@ -69,6 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/note_name"
+            android:textColor="@color/textColorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_note_header_divider" />
 
@@ -78,6 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/select_course"
+            android:textColor="@color/textColorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_note_name" />
 
@@ -85,11 +92,12 @@
             android:id="@+id/edit_note_course_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/course_icon"
+            android:tint="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="@+id/edit_note_course_dropdown"
             app:layout_constraintStart_toStartOf="@+id/edit_note_select_course_dropdown_label"
             app:layout_constraintTop_toTopOf="@+id/edit_note_course_dropdown"
-            app:srcCompat="@drawable/ic_course"
-            android:contentDescription="@string/course_icon" />
+            app:srcCompat="@drawable/ic_course" />
 
         <View
             android:id="@+id/edit_note_course_dropdown_divider"
@@ -97,6 +105,7 @@
             android:layout_height="1dp"
             android:layout_marginTop="2dp"
             android:background="@android:color/darker_gray"
+            android:backgroundTint="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_note_course_dropdown" />
@@ -107,6 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@string/body"
+            android:textColor="@color/textColorPrimary"
             android:textSize="32sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_note_course_dropdown_divider" />
@@ -117,6 +127,7 @@
             android:layout_height="2dp"
             android:layout_marginTop="8dp"
             android:background="@android:color/black"
+            android:backgroundTint="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_note_body_header" />

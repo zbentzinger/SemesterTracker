@@ -15,8 +15,10 @@
             android:id="@+id/edit_term_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
             android:drawableStart="@drawable/ic_term"
             android:drawablePadding="8dp"
+            android:drawableTint="@color/colorPrimary"
             android:inputType="textPersonName|textCapWords"
             android:paddingStart="0dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,8 +29,10 @@
             android:id="@+id/edit_term_start_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
             android:drawableStart="@drawable/ic_date"
             android:drawablePadding="8dp"
+            android:drawableTint="@color/colorPrimary"
             android:editable="false"
             android:focusable="false"
             android:paddingStart="0dp"
@@ -40,8 +44,10 @@
             android:id="@+id/edit_term_end_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
             android:drawableStart="@drawable/ic_date"
             android:drawablePadding="8dp"
+            android:drawableTint="@color/colorPrimary"
             android:editable="false"
             android:focusable="false"
             android:paddingStart="0dp"
@@ -66,6 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/term_name"
+            android:textColor="@color/textColorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_term_courses_header_divider" />
 
@@ -75,6 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/term_start_date"
+            android:textColor="@color/textColorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_term_name" />
 
@@ -84,6 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/term_end_date"
+            android:textColor="@color/textColorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_term_start_date" />
 
@@ -93,6 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@string/course_list"
+            android:textColor="@color/textColorPrimary"
             android:textSize="32sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_term_end_date" />
@@ -103,6 +113,7 @@
             android:layout_height="2dp"
             android:layout_marginTop="8dp"
             android:background="@android:color/black"
+            android:backgroundTint="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_term_courses_label" />
@@ -113,6 +124,7 @@
             android:layout_height="2dp"
             android:layout_marginTop="8dp"
             android:background="@android:color/black"
+            android:backgroundTint="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_term_header" />
@@ -133,6 +145,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/term_details"
+            android:textColor="@color/textColorPrimary"
             android:textSize="32sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

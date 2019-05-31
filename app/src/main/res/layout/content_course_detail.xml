@@ -15,10 +15,13 @@
             android:id="@+id/edit_course_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
             android:drawableStart="@drawable/ic_course"
             android:drawablePadding="8dp"
+            android:drawableTint="@color/colorPrimary"
             android:inputType="textPersonName|textCapWords"
             android:paddingStart="0dp"
+            android:textColor="@color/textColorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_name_label" />
@@ -27,8 +30,10 @@
             android:id="@+id/edit_course_start_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
             android:drawableStart="@drawable/ic_date"
             android:drawablePadding="8dp"
+            android:drawableTint="@color/colorPrimary"
             android:editable="false"
             android:focusable="false"
             android:paddingStart="0dp"
@@ -40,8 +45,10 @@
             android:id="@+id/edit_course_end_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
             android:drawableStart="@drawable/ic_date"
             android:drawablePadding="8dp"
+            android:drawableTint="@color/colorPrimary"
             android:editable="false"
             android:focusable="false"
             android:paddingStart="0dp"
@@ -53,8 +60,10 @@
             android:id="@+id/edit_course_mentor_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
             android:drawableStart="@drawable/ic_mentor"
             android:drawablePadding="8dp"
+            android:drawableTint="@color/colorPrimary"
             android:inputType="textPersonName|textCapWords"
             android:paddingStart="0dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -65,8 +74,10 @@
             android:id="@+id/edit_course_mentor_phone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
             android:drawableStart="@drawable/ic_phone"
             android:drawablePadding="8dp"
+            android:drawableTint="@color/colorPrimary"
             android:inputType="phone"
             android:paddingStart="0dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -77,8 +88,10 @@
             android:id="@+id/edit_course_mentor_email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
             android:drawableStart="@drawable/ic_email"
             android:drawablePadding="8dp"
+            android:drawableTint="@color/colorPrimary"
             android:inputType="textEmailAddress"
             android:paddingStart="0dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -90,6 +103,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:backgroundTint="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/edit_course_select_term_icon"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_term_dropdown_label" />
@@ -99,6 +113,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:buttonTint="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="@+id/edit_course_notifications_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/edit_course_notifications_label" />
@@ -108,6 +123,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:backgroundTint="@color/colorPrimary"
             android:entries="@array/course_statuses"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/edit_course_status_icon"
@@ -127,6 +143,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/course_details"
+            android:textColor="@color/textColorPrimary"
             android:textSize="32sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -137,6 +154,7 @@
             android:layout_height="2dp"
             android:layout_marginTop="8dp"
             android:background="@android:color/black"
+            android:backgroundTint="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -147,6 +165,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/course_name"
+            android:textColor="@color/textColorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_header_divider" />
 
@@ -156,6 +175,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/course_start_date"
+            android:textColor="@color/textColorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_name" />
 
@@ -165,6 +185,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/course_end_date"
+            android:textColor="@color/textColorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_start_date" />
 
@@ -174,6 +195,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/mentor_name"
+            android:textColor="@color/textColorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_mentor_divider" />
 
@@ -183,6 +205,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/mentor_phone"
+            android:textColor="@color/textColorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_mentor_name" />
 
@@ -192,6 +215,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/mentor_email"
+            android:textColor="@color/textColorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_mentor_phone" />
 
@@ -201,6 +225,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/status"
+            android:textColor="@color/textColorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_term_dropdown" />
 
@@ -208,11 +233,12 @@
             android:id="@+id/edit_course_status_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/status_icon"
+            android:tint="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="@+id/edit_course_status_dropdown"
             app:layout_constraintStart_toStartOf="@+id/edit_course_status_dropdown_label"
             app:layout_constraintTop_toTopOf="@+id/edit_course_status_dropdown"
-            app:srcCompat="@drawable/ic_status"
-            android:contentDescription="@string/status_icon" />
+            app:srcCompat="@drawable/ic_status" />
 
         <TextView
             android:id="@+id/edit_course_term_dropdown_label"
@@ -220,6 +246,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/select_term"
+            android:textColor="@color/textColorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_end_date" />
 
@@ -227,11 +254,12 @@
             android:id="@+id/edit_course_select_term_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/term_icon"
+            android:tint="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="@+id/edit_course_term_dropdown"
             app:layout_constraintStart_toStartOf="@+id/edit_course_term_dropdown_label"
             app:layout_constraintTop_toTopOf="@+id/edit_course_term_dropdown"
-            app:srcCompat="@drawable/ic_term"
-            android:contentDescription="@string/term_icon" />
+            app:srcCompat="@drawable/ic_term" />
 
         <View
             android:id="@+id/edit_course_status_divider"
@@ -239,6 +267,7 @@
             android:layout_height="1dp"
             android:layout_marginTop="2dp"
             android:background="@android:color/darker_gray"
+            android:backgroundTint="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_status_dropdown" />
@@ -249,6 +278,7 @@
             android:layout_height="1dp"
             android:layout_marginTop="2dp"
             android:background="@android:color/darker_gray"
+            android:backgroundTint="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_term_dropdown" />
@@ -259,6 +289,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/do_you_want_alerts_for_this_course"
+            android:textColor="@color/textColorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_status_divider" />
 
@@ -268,6 +299,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@string/mentor_details"
+            android:textColor="@color/textColorPrimary"
             android:textSize="32sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_notifications_label" />
@@ -278,6 +310,7 @@
             android:layout_height="2dp"
             android:layout_marginTop="8dp"
             android:background="@android:color/black"
+            android:backgroundTint="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_mentor_header" />
@@ -288,6 +321,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@string/assessment_list"
+            android:textColor="@color/textColorPrimary"
             android:textSize="32sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_mentor_email" />
@@ -298,6 +332,7 @@
             android:layout_height="2dp"
             android:layout_marginTop="8dp"
             android:background="@android:color/black"
+            android:backgroundTint="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_course_assessments_list_header" />
