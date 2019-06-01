@@ -23,10 +23,10 @@ public interface AssessmentDAO {
     @Delete
     void delete(Assessment assessment);
 
-    @Query("SELECT * FROM assessments ORDER BY due_date ASC")
+    @Query("SELECT * FROM assessments ORDER BY id DESC")
     LiveData<List<Assessment>> getAllAssessments();
 
-    @Query("SELECT * FROM assessments WHERE course_id = :course_id ORDER BY due_date ASC")
+    @Query("SELECT * FROM assessments WHERE course_id = :course_id ORDER BY id DESC")
     LiveData<List<Assessment>> getAllAssessmentsForCourse(long course_id);
 
 }

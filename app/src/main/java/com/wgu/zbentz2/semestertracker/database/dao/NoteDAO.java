@@ -23,10 +23,10 @@ public interface NoteDAO {
     @Delete
     void delete(Note note);
 
-    @Query("SELECT * FROM notes ORDER BY id ASC")
+    @Query("SELECT * FROM notes ORDER BY id DESC")
     LiveData<List<Note>> getAllNotes();
 
-    @Query("SELECT * FROM notes WHERE course_id = :course_id ORDER BY id ASC")
+    @Query("SELECT * FROM notes WHERE course_id = :course_id ORDER BY id DESC")
     LiveData<List<Note>> getAllNotesForCourse(long course_id);
 
 }

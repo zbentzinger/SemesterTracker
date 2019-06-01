@@ -23,10 +23,7 @@ public interface TermDAO {
     @Delete
     void delete(Term term);
 
-    @Query("SELECT * FROM terms ORDER BY end_date ASC")
+    @Query("SELECT * FROM terms ORDER BY id DESC")
     LiveData<List<Term>> getAllTerms();
-
-    @Query("SELECT * FROM terms where id = :term_id ORDER BY end_date ASC")
-    Term getTerm(long term_id);
 
 }
