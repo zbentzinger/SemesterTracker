@@ -90,4 +90,4 @@ Edit Term | Edit Course | Edit Course Ext | Edit Assessment | Edit Note
 
 ## Storyboard
 ---
-![StoryBoard](./screenshots/C196_StoryBoard.png)
+![StoryBoard](./screenshots/C196_Storyboard.png)
