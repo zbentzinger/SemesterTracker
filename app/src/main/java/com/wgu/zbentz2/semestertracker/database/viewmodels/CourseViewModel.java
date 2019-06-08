@@ -39,6 +39,7 @@ public class CourseViewModel extends AndroidViewModel {
 
         Course course = null;
 
+        // This is where overriding equals() and hashCode() in the Course entity comes in handy.
         for (Course c : allCourses.getValue()) {
 
             if (c.getId() == course_id) {

@@ -29,6 +29,7 @@ public class TermViewModel extends AndroidViewModel {
 
     }
 
+    // This is where overriding equals() and hashCode() in the Term entity comes in handy.
     public Term getTerm(long term_id) {
 
         Term term = null;
